@@ -20,12 +20,27 @@ export default function Home() {
         </h1>
 
         <div className={styles.description}>
-          Thsi project is about xxx
+          <h2 className={styles.card}>
+            About This Project
+          </h2>
+          The Emergency Food and Shelter Program is a federal grant that provides funds to agencies for emergency financial assistance for individuals and families in crisis. United Way of Greater Atlanta administers this grant in eight metro counties.
+          This application tracks the recipients of funds for grant administers and to provide an interface for logging distributions and providing analytics about previous funding records.
+        </div>
+        <div className={styles.description}>
+          <h2 className={styles.card}>
+            Goals of this Project
+          </h2>
+
+            <li>Provide an online form to submit funding requests</li>
+            <li>Maintain a database of all previous funding grants</li>
+            <li>Provide an interface to view previous grants</li>
+            <li>Enable administers to view the current status of funding</li>
+
         </div>
         <table className={styles.table}>
           <tr>
             <td>{'Marium Ali'}, Column 1</td>
-            <td>Row 1, Column 2</td>
+            <td>{'Andrew Spittlemeister'}, Column 2</td>
           </tr>
           <tr>
             <td>Row 2, Column 1</td>
