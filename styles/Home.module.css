@@ -7,8 +7,13 @@
   min-height: 100vh;
 }
 
+.table {
+  align-items: center;
+  width: 100%;
+}
+
 .description {
-  display: inherit;
+  display: flex;
   justify-content: inherit;
   align-items: inherit;
   font-size: 0.85rem;
