@@ -26,6 +26,28 @@ export default function Home() {
           The Emergency Food and Shelter Program is a federal grant that provides funds to agencies for emergency financial assistance for individuals and families in crisis. United Way of Greater Atlanta administers this grant in eight metro counties.
           This application tracks the recipients of funds for grant administers and to provide an interface for logging distributions and providing analytics about previous funding records.
         </div>
+
+        <table className={styles.styledTable}>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Goal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{'Marium Ali'}</td>
+              <td>{'Front End Engineer'}</td>
+              <td>{'Develop a working and easy to use MVP for client to be able to use'}</td>
+            </tr>
+            <tr className={styles.activeRow}>
+              <td>Melissa</td>
+              <td>5150</td>
+            </tr>
+          </tbody>
+        </table>
+
         <div className={styles.description}>
           <h2 className={styles.card}>
             Goals of this Project
@@ -37,16 +59,6 @@ export default function Home() {
             <li>Enable administers to view the current status of funding</li>
 
         </div>
-        <table className={styles.table}>
-          <tr>
-            <td>{'Marium Ali'}, Column 1</td>
-            <td>{'Andrew Spittlemeister'}, Column 2</td>
-          </tr>
-          <tr>
-            <td>Row 2, Column 1</td>
-            <td>Row 2, Column 2</td>
-          </tr>
-        </table>
       </main>
     </>
   )
