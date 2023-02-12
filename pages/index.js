@@ -65,7 +65,7 @@ export default function Home() {
             <tr>
               <td>{'Bryan Xian '}</td>
               <td>{'Backend/Data Engineer'}</td>
-              <td>{'Develop a working and easy to use MVP for client to be able to use'}</td>
+              <td>{'Develop a working and easy to use MVP for client. I would like to make a positive and lasting impact on the Metro Atlanta community by the end of this project. I plan to do this by using my software engineering skills to save employees of United Way of Atlanta time, so they can better serve the community.'}</td>
             </tr>
             <tr>
               <td>{'Marium Ali'}</td>
