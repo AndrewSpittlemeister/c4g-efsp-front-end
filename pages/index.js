@@ -71,7 +71,7 @@ export default function Home() {
             <tr>
               <td>{'Pallavi Bhatnagar'}</td>
               <td>{'Full Stack Engineer'}</td>
-              <td>{'Develop a working and easy to use MVP for client to be able to use'}</td>
+              <td>{'Develop a working and easy to use Minimal Loveable Product for the client. Working with the team I will contibute to all phases of software devlopment lifecycle for United Way. My goal will be to ensure we maintain high quality work and meet all the requirements stated by the partner.'}</td>
             </tr>
           </tbody>
         </table>
@@ -83,6 +83,7 @@ export default function Home() {
           <span>
           <ul>
             <li>Provide an online form to submit funding requests</li>
+            <li>Provide an automated solution to detect if the funding should be approved or denied</li>
             <li>Maintain a database of all previous funding grants</li>
             <li>Provide an interface to view previous grants</li>
             <li>Enable administers to view the current status of funding</li>
