@@ -101,7 +101,7 @@ export default function Home() {
           </h2>
           <span>
             <ul>
-              <li>Performance: 91%</li>
+              <li>Performance: 100%</li>
               <li>Accessability: 100%</li>
               <li>Best Practices: 100%</li>
               <li>SEO: 100%</li>
