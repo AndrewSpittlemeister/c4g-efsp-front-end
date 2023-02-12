@@ -22,6 +22,7 @@ export default function Home() {
           <span>
             <Image
               src="/united-way.png"
+              alt="United Way Logo"
               width={250}
               height={80}
               priority
@@ -34,9 +35,9 @@ export default function Home() {
         </h1>
 
         <div className={styles.card}>
-          <h3>
+          <h2>
             About This Project
-          </h3>
+          </h2>
           <span>
             The Emergency Food and Shelter Program is a federal grant that provides funds to agencies for emergency financial assistance for individuals and families in crisis. United Way of Greater Atlanta administers this grant in eight metro counties.
             This application tracks the recipients of funds for grant administers and to provide an interface for logging distributions and providing analytics about previous funding records.
@@ -76,21 +77,23 @@ export default function Home() {
         </table>
 
         <div className={styles.card}>
-          <h3>
+          <h2>
             Goals of this Project
-          </h3>
+          </h2>
           <span>
-          <li>Provide an online form to submit funding requests</li>
-          <li>Maintain a database of all previous funding grants</li>
-          <li>Provide an interface to view previous grants</li>
-          <li>Enable administers to view the current status of funding</li>
+          <ul>
+            <li>Provide an online form to submit funding requests</li>
+            <li>Maintain a database of all previous funding grants</li>
+            <li>Provide an interface to view previous grants</li>
+            <li>Enable administers to view the current status of funding</li>
+          </ul>
           </span>
         </div>
 
         <div className={styles.card}>
-          <h3>
+          <h2>
             Lighthouse scores
-          </h3>
+          </h2>
           <span>
 
           </span>        
