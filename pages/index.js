@@ -15,7 +15,7 @@ export default function Home() {
             src="/gtech.png"
             alt="GA Tech Logo"
             width={250}
-            height={70}
+            height={80}
             priority
           />
           </span>
