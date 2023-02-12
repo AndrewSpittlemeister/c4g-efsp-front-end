@@ -70,7 +70,7 @@ export default function Home() {
             <tr>
               <td>{'Marium Ali'}</td>
               <td>{'Full Stack Engineer'}</td>
-              <td>{'Develop a working and easy to use MVP for client to be able to use. I would like the client to be able to process a new request for shelter as soon as possible identifying the duplication rules and make a decision without much manual interaction. Additionally, the interface should be easy to use and training-free. My goal is to use my expertise and make that happen as a team!'}</td>
+              <td>{"Develop a working and easy to use MVP for client to be able to use. I would like the client to be able to process a new request for shelter as soon as possible identifying the duplication rules and make a decision without much manual interaction. Additionally, the interface should be easy to use and training-free. My goal is to use my expertise and make that happen as a team!"}</td>
             </tr>
             <tr>
               <td>{'Pallavi Bhatnagar'}</td>
@@ -85,13 +85,13 @@ export default function Home() {
             Goals of this Project
           </h2>
           <span>
-          <ul>
-            <li>Provide an online form to submit funding requests</li>
-            <li>Provide an automated solution to detect if the funding should be approved or denied</li>
-            <li>Maintain a database of all previous funding grants</li>
-            <li>Provide an interface to view previous grants</li>
-            <li>Enable administers to view the current status of funding</li>
-          </ul>
+            <ul>
+              <li>Provide an online form to submit funding requests</li>
+              <li>Provide an automated solution to detect if the funding should be approved or denied</li>
+              <li>Maintain a database of all previous funding grants</li>
+              <li>Provide an interface to view previous grants</li>
+              <li>Enable administers to view the current status of funding</li>
+            </ul>
           </span>
         </div>
 
@@ -100,7 +100,13 @@ export default function Home() {
             Lighthouse scores
           </h2>
           <span>
-
+            <ul>
+              <li>Performance: 91%</li>
+              <li>Accessability: 100%</li>
+              <li>Best Practices: 100%</li>
+              <li>SEO: 100%</li>
+              <li>PWA: 100%</li>
+            </ul>
           </span>        
         </div>
       </main>
