@@ -53,9 +53,9 @@ export default function Home() {
           </thead>
           <tbody>
             <tr>
-              <td>{'Andrew Spittlemeister '}</td>
+              <td>{'Andrew Spittlemeister'}</td>
               <td>{'Backend/Data Engineer and Team lead'}</td>
-              <td>{'Develop a working and easy to use MVP for client to be able to use'}</td>
+              <td>{'Contribute to building an application that can streamline the process of managing shelter funding requests, checking for duplication, and providing an informative view for administrators. I would also like to help provide support to my team and facilitate their abilities to create a well-rounded application.'}</td>
             </tr>
             <tr>
               <td>{'Bryan Xian '}</td>
@@ -65,7 +65,7 @@ export default function Home() {
             <tr>
               <td>{'Marium Ali'}</td>
               <td>{'Full Stack Engineer'}</td>
-              <td>{'Develop a working and easy to use MVP for client to be able to use. I would like the client to be able to process a new request for shelter as soon as possible identifying the duplication rules and make a decision without much manual interaction. Additionally, the interface should be easy to use and training-free. My goal is to use my expertise and make that happen as a team !'}</td>
+              <td>{'Develop a working and easy to use MVP for client to be able to use. I would like the client to be able to process a new request for shelter as soon as possible identifying the duplication rules and make a decision without much manual interaction. Additionally, the interface should be easy to use and training-free. My goal is to use my expertise and make that happen as a team!'}</td>
             </tr>
             <tr>
               <td>{'Pallavi Bhatnagar'}</td>
