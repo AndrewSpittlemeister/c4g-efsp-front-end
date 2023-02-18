@@ -1,3 +1,12 @@
+.container {
+  padding: 1rem 1.2rem;
+  background: rgba(var(--card-rgb), 0.1);
+  transition: background 200ms, border 200ms;
+  margin-top: 1rem;
+  font-family: var(--font-mono);
+  font-size: 16px;
+}
+
 .main {
   display: flex;
   flex-direction: column;
@@ -61,6 +70,8 @@
   border: 1px solid rgba(var(--card-border-rgb), 0.5);
   transition: background 200ms, border 200ms;
   margin-top: 3rem;
+  font-family: var(--font-mono);
+  font-size: 16px;
 }
 
 .card span {
@@ -222,4 +233,34 @@
   .card:hover span {
     transform: none;
   }
+}
+
+.button {
+  background-color: #d1a53e;
+  font-size: 20px;
+  border-radius: 2px;
+  font-weight: bold;
+  border: 1px;
+  min-width: 20%;
+  min-height: 100px;
+}
+
+.button:hover {
+  background-color: rgba(103, 101, 101, 0.369);
+}
+
+.invisibleButton {
+  background-color: transparent;
+  border: none;
+  font-size: 18px; 
+  position: relative;
+  transition: all 0.2s;
+}
+
+.invisibleButton:hover {
+  font-weight: bold;
+  text-decoration: underline;
+}
+.invisibleButton:hover:before{
+  width: 100%;
 }

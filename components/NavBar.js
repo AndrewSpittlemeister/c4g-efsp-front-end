@@ -1,6 +1,8 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import NavItem from "@/components/NavItem";
+import { useSession, signIn, signOut } from "next-auth/react"
+import styles from '@/styles/Home.module.css'
 
 const MENU_LIST = [
   { text: "Home", href: "/" },
@@ -11,6 +13,7 @@ const MENU_LIST = [
 export default function Navbar() {
   const [navActive, setNavActive] = useState(null);
   const [activeIdx, setActiveIdx] = useState(-1);
+  const { data: session } = useSession();
 
   return (
     <header>
@@ -36,6 +39,21 @@ export default function Navbar() {
               <NavItem active={activeIdx === idx} {...menu} />
             </div>
           ))}
+          {
+            session ? (
+              <div>
+                <button className={styles.invisibleButton} onClick={() => signOut()}>
+                  {'Sign out'}
+                </button>
+              </div>
+            ) : (
+              <div>
+                <button className={styles.invisibleButton} onClick={() => signIn()}>
+                  {'Sign In'}
+                </button>
+              </div>
+            )
+          }
         </div>
       </nav>
     </header>
