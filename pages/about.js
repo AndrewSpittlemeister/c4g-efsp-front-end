@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Head from 'next/head'
+import Link from "next/link";
 import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 
@@ -107,6 +108,18 @@ export default function page() {
                   <li>PWA: 100%</li>
                 </ul>
               </span>        
+            </div>
+
+            <div className={styles.card}>
+              <h2 style={{margin: 'auto'}}>Project Overview Presentation</h2>
+              <br></br>
+              <p className={"nav__menu-list"} style={{margin: 'auto'}}>
+                <Link href={"https://gtvault-my.sharepoint.com/:b:/g/personal/aws3_gatech_edu/EZYxFD0lUUtBuHNpYNKPTEABk-LKQPHTRXvv17vPIYWG0g?e=ZfAMPM"}>{"Presentation Slides Link"}</Link>
+              </p>
+              <br></br>
+              <p className={"nav__menu-list"} style={{margin: 'auto'}}>
+                <Link href={"https://gtvault-my.sharepoint.com/:v:/g/personal/aws3_gatech_edu/EaXFcW3I-39LplIYwZwvBVcB3J0pgz3hu3tcdVWkyYVT8w?e=XC2KKr"}>{"Presentation Video Link"}</Link>
+              </p>
             </div>
           </main>
         </>
