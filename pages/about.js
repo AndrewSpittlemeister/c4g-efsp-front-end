@@ -116,6 +116,10 @@ export default function page() {
               <p className={"nav__menu-list"} style={{margin: 'auto'}}>
                 <Link href={"https://gtvault-my.sharepoint.com/:b:/g/personal/aws3_gatech_edu/EZYxFD0lUUtBuHNpYNKPTEABk-LKQPHTRXvv17vPIYWG0g?e=ZfAMPM"}>{"Presentation Slides Link"}</Link>
               </p>
+              <br></br>
+              <p className={"nav__menu-list"} style={{margin: 'auto'}}>
+                <Link href={"https://gtvault-my.sharepoint.com/:v:/g/personal/aws3_gatech_edu/EaXFcW3I-39LplIYwZwvBVcB3J0pgz3hu3tcdVWkyYVT8w?e=XC2KKr"}>{"Presentation Video Link"}</Link>
+              </p>
             </div>
           </main>
         </>
