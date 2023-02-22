@@ -1,7 +1,6 @@
 import Image from 'next/image'
 import Head from 'next/head'
 import Link from "next/link";
-import { Inter } from '@next/font/google'
 import styles from '@/styles/Home.module.css'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
@@ -131,7 +130,10 @@ export default function AboutPage() {
             <h2>
               Process Application Form
             </h2>
-            <button className={styles.button} onClick={() => router.push('/form')}>Process a new application</button>
+            <br></br>
+            <button className={styles.button} style={{margin: 'auto'}} onClick={() => router.push('/form')}>
+              Process New Application
+            </button>
           </div>
         ) : ''}
       </main>

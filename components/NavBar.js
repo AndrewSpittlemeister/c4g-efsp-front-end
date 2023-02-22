@@ -29,13 +29,7 @@ export default function Navbar() {
         </div>
         <div className={`${navActive ? "active" : ""} nav__menu-list`}>
           {MENU_LIST.map((menu, idx) => (
-            <div
-              onClick={() => {
-                setActiveIdx(idx);
-                setNavActive(false);
-              }}
-              key={menu.text}
-            >
+            <div onClick={() => { setActiveIdx(idx); setNavActive(false);}} key={menu.text}>
               <NavItem active={activeIdx === idx} {...menu} />
             </div>
           ))}
