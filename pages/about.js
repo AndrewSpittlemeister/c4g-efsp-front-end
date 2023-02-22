@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import Head from 'next/head'
 import styles from '@/styles/Home.module.css'
-import { useSession } from "next-auth/react"
-import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 
 
-export default function page() {
+export default function AboutPage() {
   const router = useRouter();
   const { data: session } = useSession();
   return (
