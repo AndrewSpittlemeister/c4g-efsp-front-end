@@ -71,57 +71,57 @@ export default function Contact() {
         <form method="POST" action="https://www.formbackend.com/f/664decaabbf1c319" onSubmit={submitForm}>
         <div>
           <label>Last Name</label>
-          <input type="text" name="name" onChange={handleInput} value={formData.lastname} />
+          <input type="text" name="lastname" onChange={handleInput} value={formData.lastname} />
         </div>
 
         <div>
             <label>Middle Name</label>
-            <input type="text" name="name" onChange={handleInput} value={formData.middlename} />
+            <input type="text" name="middlename" onChange={handleInput} value={formData.middlename} />
           </div>
 
           <div>
             <label>First Name</label>
-            <input type="text" name="name" onChange={handleInput} value={formData.firstname} />
+            <input type="text" name="firstname" onChange={handleInput} value={formData.firstname} />
           </div>
 
           <div>
             <label>Date of Birth</label>
-            <input type="text" name="name" onChange={handleInput} value={formData.dob} />
+            <input type="text" name="dob" onChange={handleInput} value={formData.dob} />
           </div>
 
           <div>
             <label>Agency Name</label>
-            <input type="text" name="name" onChange={handleInput} value={formData.agencyname} />
+            <input type="text" name="agencyname" onChange={handleInput} value={formData.agencyname} />
           </div>
 
           <div>
-            <label>juriscdiction</label>
-            <input type="text" name="email" onChange={handleInput} value={formData.juriscdiction} />
+            <label>Jurisdiction</label>
+            <input type="text" name="jurisdiction" onChange={handleInput} value={formData.jurisdiction} />
           </div>
 
           <div>
             <label>Assistance Type</label>
-            <input type="text" name="email" onChange={handleInput} value={formData.assistancetype} />
+            <input type="text" name="assistancetype" onChange={handleInput} value={formData.assistancetype} />
           </div>
 
           <div>
             <label>One month Amount</label>
-            <input type="text" name="email" onChange={handleInput} value={formData.onemonthamt} />
+            <input type="text" name="onemonthamt" onChange={handleInput} value={formData.onemonthamt} />
           </div>
 
           <div>
-            <label>Amoutn of Service </label>
-            <input type="text" name="email" onChange={handleInput} value={formData.serviceamt} />
+            <label>Amount of Service </label>
+            <input type="text" name="serviceamt" onChange={handleInput} value={formData.serviceamt} />
           </div>
 
           <div>
             <label>Direct/Indirect</label>
-            <input type="text" name="email" onChange={handleInput} value={formData.directIndirect} />
+            <input type="text" name="directIndirect" onChange={handleInput} value={formData.directIndirect} />
           </div>
 
           <div>
             <label>Vendor</label>
-            <input type="text" name="email" onChange={handleInput} value={formData.vendor} />
+            <input type="text" name="vendor" onChange={handleInput} value={formData.vendor} />
           </div>
 
           <div>
@@ -130,7 +130,7 @@ export default function Contact() {
           </div>
 
           <div>
-            <label>Additional Message</label>
+            <label>Additional Message: </label>
             <textarea name="message" onChange={handleInput} value={formData.message}></textarea>
           </div>
 
