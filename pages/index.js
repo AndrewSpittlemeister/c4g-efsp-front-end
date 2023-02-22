@@ -21,16 +21,28 @@ export default function Home() {
     <title>{"EFSP Dashboard"}</title>
     <meta property="og:title" content="EFSP Dashboard" key="title" />
   </Head>
-  if (session) {
-    router.push('/about');
-  }
   return (
     <>
       <main className={styles.main}>
         <h1>{WELCOME_MESSAGE}</h1>
         <div className={styles.card}>{WELCOME_PROMPT}</div>
         <div className={styles.container}>Click to sign into your gmail user account </div><br />
-        <button className={styles.button} onClick={() => signIn()}>Sign in</button>
+
+        {
+          session ? (
+            <div className={styles.card}>
+              <h2>
+                Process Application Form
+              </h2>
+              <br></br>
+              <button className={styles.button} style={{margin: 'auto'}} onClick={() => router.push('/form')}>
+                Process New Application
+              </button>
+            </div>
+          ) : (
+            <button className={styles.button} onClick={() => signIn()}>Sign In</button>
+          )
+        }
       </main>
     </>
   );

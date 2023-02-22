@@ -124,18 +124,6 @@ export default function AboutPage() {
             <Link href={"https://gtvault-my.sharepoint.com/:v:/g/personal/aws3_gatech_edu/EaXFcW3I-39LplIYwZwvBVcB3J0pgz3hu3tcdVWkyYVT8w?e=XC2KKr"}>{"Presentation Video Link"}</Link>
           </p>
         </div>
-
-        {session ? (
-          <div className={styles.card}>
-            <h2>
-              Process Application Form
-            </h2>
-            <br></br>
-            <button className={styles.button} style={{margin: 'auto'}} onClick={() => router.push('/form')}>
-              Process New Application
-            </button>
-          </div>
-        ) : ''}
       </main>
     </>
   )

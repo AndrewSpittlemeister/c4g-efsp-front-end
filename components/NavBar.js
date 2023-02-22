@@ -37,7 +37,7 @@ export default function Navbar() {
             session ? (
               <div>
                 <button className={styles.invisibleButton} onClick={() => signOut()}>
-                  {'Sign out'}
+                  {'Sign Out'}
                 </button>
               </div>
             ) : (
