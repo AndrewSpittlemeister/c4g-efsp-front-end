@@ -26,21 +26,28 @@ export default function Home() {
       <main className={styles.main}>
         <h1>{WELCOME_MESSAGE}</h1>
         <div className={styles.card}>{WELCOME_PROMPT}</div>
-        <div className={styles.container}>Click to sign into your gmail user account </div><br />
-
         {
           session ? (
             <div className={styles.card}>
-              <h2>
-                Process Application Form
-              </h2>
+              <p>
+                Click below to display a form for submitting a new application.
+              </p>
               <br></br>
               <button className={styles.button} style={{margin: 'auto'}} onClick={() => router.push('/form')}>
                 Process New Application
               </button>
             </div>
           ) : (
-            <button className={styles.button} onClick={() => signIn()}>Sign In</button>
+            <div className={styles.card}>
+              <p>
+                Click below to sign in with your Gmail user account.
+              </p>
+              <br></br>
+              <button className={styles.button} style={{margin: 'auto'}} onClick={() => signIn()}>
+                Sign In
+              </button>
+            </div>
+            
           )
         }
       </main>
