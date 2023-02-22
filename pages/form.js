@@ -1,3 +1,4 @@
+import styles from '@/styles/Home.module.css'
 import React, { useState } from "react"
 
 export default function Contact() {
@@ -63,78 +64,104 @@ export default function Contact() {
   }
 
   return (
-    <div>
-      <h1>Application form</h1>
+    <div style={{width: '80%', minWidth: "250px"}}>
+      <div className={styles.container}><h1>Application Form</h1></div>
       {formSuccess ? 
-        <div>{formSuccessMessage}</div> 
+        <div className={styles.container}>{formSuccessMessage}</div> 
         : 
-        <form method="POST" action="https://www.formbackend.com/f/664decaabbf1c319" onSubmit={submitForm}>
-        <div>
-          <label>Last Name</label>
-          <input type="text" name="lastname" onChange={handleInput} value={formData.lastname} />
-        </div>
-
-        <div>
-            <label>Middle Name</label>
-            <input type="text" name="middlename" onChange={handleInput} value={formData.middlename} />
+        <form method="POST" action="https://www.formbackend.com/f/664decaabbf1c319" onSubmit={submitForm} style={{overflow: 'hidden'}}>
+          <div className={styles.container}>
+            <label>Last Name: </label>
+            <span style={{display: "block", overflow: "hidden", marginTop: "5px"}}>
+              <input type="text" name="lastname" style={{width: '100%'}} onChange={handleInput} value={formData.lastname} />
+            </span>
           </div>
 
-          <div>
-            <label>First Name</label>
-            <input type="text" name="firstname" onChange={handleInput} value={formData.firstname} />
+          <div className={styles.container}>
+            <label>Middle Name: </label>
+            <span style={{display: "block", overflow: "hidden", marginTop: "5px"}}>
+              <input type="text" name="middlename" style={{width: '100%'}} onChange={handleInput} value={formData.middlename} />
+            </span>
           </div>
 
-          <div>
-            <label>Date of Birth</label>
-            <input type="text" name="dob" onChange={handleInput} value={formData.dob} />
+          <div className={styles.container}>
+            <label>First Name: </label>
+            <span style={{display: "block", overflow: "hidden", marginTop: "5px"}}>
+              <input type="text" name="firstname" style={{width: '100%'}} onChange={handleInput} value={formData.firstname} />
+            </span>
           </div>
 
-          <div>
-            <label>Agency Name</label>
-            <input type="text" name="agencyname" onChange={handleInput} value={formData.agencyname} />
+          <div className={styles.container}>
+            <label>Date of Birth: </label>
+            <span style={{display: "block", overflow: "hidden", marginTop: "5px"}}>
+              <input type="text" name="dob" style={{width: '100%'}} onChange={handleInput} value={formData.dob} />
+            </span>
           </div>
 
-          <div>
-            <label>Jurisdiction</label>
-            <input type="text" name="jurisdiction" onChange={handleInput} value={formData.jurisdiction} />
+          <div className={styles.container}>
+            <label>Agency Name: </label>
+            <span style={{display: "block", overflow: "hidden", marginTop: "5px"}}>
+              <input type="text" name="agencyname" style={{width: '100%'}} onChange={handleInput} value={formData.agencyname} />
+            </span>
           </div>
 
-          <div>
-            <label>Assistance Type</label>
-            <input type="text" name="assistancetype" onChange={handleInput} value={formData.assistancetype} />
+          <div className={styles.container}>
+            <label>Jurisdiction: </label>
+            <span style={{display: "block", overflow: "hidden", marginTop: "5px"}}>
+              <input type="text" name="jurisdiction" style={{width: '100%'}} onChange={handleInput} value={formData.jurisdiction} />
+            </span>
           </div>
 
-          <div>
-            <label>One month Amount</label>
-            <input type="text" name="onemonthamt" onChange={handleInput} value={formData.onemonthamt} />
+          <div className={styles.container}>
+            <label>Assistance Type: </label>
+            <span style={{display: "block", overflow: "hidden", marginTop: "5px"}}>
+              <input type="text" name="assistancetype" style={{width: '100%'}} onChange={handleInput} value={formData.assistancetype} />
+            </span>
           </div>
 
-          <div>
-            <label>Amount of Service </label>
-            <input type="text" name="serviceamt" onChange={handleInput} value={formData.serviceamt} />
+          <div className={styles.container}>
+            <label>One month Amount: </label>
+            <span style={{display: "block", overflow: "hidden", marginTop: "5px"}}>
+              <input type="text" name="onemonthamt" style={{width: '100%'}} onChange={handleInput} value={formData.onemonthamt} />
+            </span>
           </div>
 
-          <div>
-            <label>Direct/Indirect</label>
-            <input type="text" name="directIndirect" onChange={handleInput} value={formData.directIndirect} />
+          <div className={styles.container}>
+            <label>Amount of Service: </label>
+            <span style={{display: "block", overflow: "hidden", marginTop: "5px"}}>
+              <input type="text" name="serviceamt" style={{width: '100%'}} onChange={handleInput} value={formData.serviceamt} />
+            </span>
           </div>
 
-          <div>
-            <label>Vendor</label>
-            <input type="text" name="vendor" onChange={handleInput} value={formData.vendor} />
+          <div className={styles.container}>
+            <label>Direct/Indirect: </label>
+            <span style={{display: "block", overflow: "hidden", marginTop: "5px"}}>
+              <input type="text" name="directIndirect" style={{width: '100%'}} onChange={handleInput} value={formData.directIndirect} />
+            </span>
           </div>
 
-          <div>
-            <label>Email</label>
-            <input type="text" name="email" onChange={handleInput} value={formData.email} />
+          <div className={styles.container}>
+            <label>Vendor: </label>
+            <span style={{display: "block", overflow: "hidden", marginTop: "5px"}}>
+              <input type="text" name="vendor" style={{width: '100%'}} onChange={handleInput} value={formData.vendor} />
+            </span>
           </div>
 
-          <div>
+          <div className={styles.container}>
+            <label>Email: </label>
+            <span style={{display: "block", overflow: "hidden", marginTop: "5px"}}>
+              <input type="text" name="email" style={{width: '100%'}} onChange={handleInput} value={formData.email} />
+            </span>
+          </div>
+
+          <div className={styles.container}>
             <label>Additional Message: </label>
-            <textarea name="message" onChange={handleInput} value={formData.message}></textarea>
+            <span style={{display: "block", overflow: "hidden", marginTop: "5px"}}>
+              <textarea name="message" style={{width: '100%'}} onChange={handleInput} value={formData.message}></textarea>
+            </span>
           </div>
 
-          <button type="submit">Process Information</button>
+          <button className={styles.button} style={{marginTop: '10px', marginBottom: "10px"}} type="submit">Process Information</button>
         </form>
       }
     </div>
