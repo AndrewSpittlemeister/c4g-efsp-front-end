@@ -137,6 +137,24 @@ export default function AboutPage() {
             <Link href={"https://gtvault-my.sharepoint.com/:v:/g/personal/aws3_gatech_edu/EaXFcW3I-39LplIYwZwvBVcB3J0pgz3hu3tcdVWkyYVT8w?e=XC2KKr"}>{"Presentation Video Link"}</Link>
           </p>
         </div>
+
+        <div className={styles.card}>
+          <h2 style={{margin: 'auto'}}>Project Peer Evaluations Section</h2>
+          <br></br>
+          <p style={{margin: 'auto', minWidth: '500px'}}>
+            This temporary section is intended for peers in the Georgia Tech C4G group. The link to the survey can be found below and in the navbar. This survey will require authentication
+            as part of the tasking, a temporary account has been created for this use, the credentials are below (note that this does not gain access to any sensitive or even real information):
+            <br></br>
+            <br></br>
+            Email: c4g.efsp.test@gmail.com
+            <br></br>
+            Password: United+Way+Atlanta+2023
+          </p>
+          <br></br>
+          <p className={"nav__menu-list"} style={{margin: 'auto'}}>
+            <Link href={"https://forms.office.com/Pages/ResponsePage.aspx?id=u5ghSHuuJUuLem1_Mvqgg77XCbGawB9Gl_Mb2IsliK9UQ0tBTjQzNk1PWFA1R0FTUEQyRFRTNkdQQS4u"}>{"Survey"}</Link>
+          </p>
+        </div>
       </main>
     </>
   )
