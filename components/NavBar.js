@@ -8,6 +8,7 @@ const MENU_LIST = [
   { text: "Home", href: "/" },
   { text: "About", href: "/about" },
   { text: "GitHub", href: "https://github.com/AndrewSpittlemeister/c4g-efsp-front-end" },
+  { text: "Survey", href: "https://forms.office.com/Pages/ResponsePage.aspx?id=u5ghSHuuJUuLem1_Mvqgg77XCbGawB9Gl_Mb2IsliK9UQ0tBTjQzNk1PWFA1R0FTUEQyRFRTNkdQQS4u"},
 ];
 
 export default function Navbar() {
