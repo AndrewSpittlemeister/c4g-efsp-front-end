@@ -271,3 +271,12 @@
 .invisibleButton:hover:before{
   width: 100%;
 }
+
+.required label {
+  font-weight: bold;
+}
+.required label:after {
+  color: #e32;
+  content: ' *';
+  display:inline;
+}
