@@ -42,7 +42,7 @@ export default function ConfirmationPage({ params }) {
                     The following records show similar information, take a look at these to ensure there is no duplication of information before confirming the request.
                 </p>
                 <br></br>
-                <hr></hr>
+
                 <h3>{"John John Johnson (j.j.johnson@gmail.com) (direct)"}</h3>
                 <p>{`DOB: ${data.dob}`}</p>
                 <p>{`Agency: ${data.agencyname}`}</p>
@@ -50,7 +50,6 @@ export default function ConfirmationPage({ params }) {
                 <p>{`One Month Amount: \$${data.onemonthamt}`}</p>
                 <p>{`Service Amount: \$${data.serviceamt}`}</p>
 
-                <hr></hr>
                 <h3>{"Mark Mark Markson (m.m.markson@gmail.com) (direct)"}</h3>
                 <p>{`DOB: ${data.dob}`}</p>
                 <p>{`Agency: ${data.agencyname}`}</p>
@@ -58,7 +57,6 @@ export default function ConfirmationPage({ params }) {
                 <p>{`One Month Amount: \$${data.onemonthamt}`}</p>
                 <p>{`Service Amount: \$${data.serviceamt}`}</p>
 
-                <hr></hr>
                 <h3>{"Tim Tim Timson (t.t.timson@gmail.com) (direct)"}</h3>
                 <p>{`DOB: ${data.dob}`}</p>
                 <p>{`Agency: ${data.agencyname}`}</p>
