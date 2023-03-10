@@ -38,7 +38,7 @@ export default function ConfirmationPage({ params }) {
                 <h2>
                     {"Existing Similar Records"}
                 </h2>
-                <p>
+                <p style={{margin: 'auto', minWidth: '500px'}}>
                     The following records show similar information, take a look at these to ensure there is no duplication of information before confirming the request.
                 </p>
                 <br></br>
