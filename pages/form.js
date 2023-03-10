@@ -116,7 +116,7 @@ export default function Contact() {
                             <div className={styles.container}>
                                 <label>Jurisdiction: </label>
                                 <span style={{ display: "block", overflow: "hidden", marginTop: "5px" }}>
-                                    <input type="text" name="jurisdiction" style={{ width: '100%' }} onChange={handleInput} value={formData.juriscdiction} />
+                                    <input type="text" name="jurisdiction" style={{ width: '100%' }} onChange={handleInput} value={formData.jurisdiction} />
                                 </span>
                             </div>
 
