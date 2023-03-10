@@ -12,7 +12,7 @@ export default function Contact() {
         firstname: "",
         dob: "",
         agencyname: "",
-        juriscdiction: "",
+        jurisdiction: "",
         assistancetype: "",
         onemonthamt: "",
         serviceamt: "",
@@ -48,24 +48,30 @@ export default function Contact() {
 
         // POST the data to the URL of the form
         console.log('Sending form data: ', formData);
-        const res = await fetch('/api/form', {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
-        });
+        router.push(
+            {
+                pathname: "/confirmation",
+                query: formData
+            }
+        );
+        // const res = await fetch('/api/form', {
+        //     method: "POST",
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify(formData),
+        // });
 
-        if (res.status == 200) {
-            const application = await res.json()
-            console.log('result', application);
-            setFormData({
-                name: "",
-                email: "",
-                message: ""
-            });
+        // if (res.status == 200) {
+        //     const application = await res.json()
+        //     console.log('result', application);
+        //     setFormData({
+        //         name: "",
+        //         email: "",
+        //         message: ""
+        //     });
 
-            alert(`Application has been ${application.result}`)
-            document.getElementById("application-form").reset();
-        }
+        //     alert(`Application has been ${application.result}`)
+        //     document.getElementById("application-form").reset();
+        // }
 
     }
 
