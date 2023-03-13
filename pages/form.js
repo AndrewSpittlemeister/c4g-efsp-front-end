@@ -50,16 +50,18 @@ export default function Contact() {
       headers: {
         'accept': 'application/json',
       },
-    }).then((response) => response.json())
-    .then((data) => {
+    }).then((response) => response.json())      
+    .then((data) => {   // Do something here after receiving response from database: To see data from db remove onSubmit and use only action on form
       setFormData({ 
         name: "", 
         email: "", 
         message: "" 
       })
-
+      alert(data.result);
+      console.log('')
       setFormSuccess(true)
       setFormSuccessMessage(data.submission_text)
+      
     })
   }
 
@@ -69,7 +71,7 @@ export default function Contact() {
       {formSuccess ? 
         <div className={styles.container}>{formSuccessMessage}</div> 
         : 
-        <form method="POST" action="https://www.formbackend.com/f/664decaabbf1c319" onSubmit={submitForm} style={{overflow: 'hidden'}}>
+        <form method="POST" action="/api/submitApplication" onSubmit={submitForm} style={{overflow: 'hidden'}}>
           <div className={styles.container}>
             <label>Last Name: </label>
             <span style={{display: "block", overflow: "hidden", marginTop: "5px"}}>

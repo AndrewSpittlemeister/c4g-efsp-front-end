@@ -14,11 +14,15 @@ requests to the EFSP database. To use these capabilities, log in with the \
 button below.\
 "
 
+
 export default function Home() {
   const router = useRouter();
   const { data: session } = useSession();
+
+
   <Head>
     <title>{"EFSP Dashboard"}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta property="og:title" content="EFSP Dashboard" key="title" />
   </Head>
   return (
