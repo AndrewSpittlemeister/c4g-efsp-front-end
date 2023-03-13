@@ -11,13 +11,7 @@ const nextConfig = {
     'MYSQL_DATABASE': 'unitedwayatlantaefsp',
     'MYSQL_USER': 'efsp_mngr',
     'MYSQL_PASSWORD':'TKL72wvu$',
-  },
-  webpack5: true,
-  webpack: (config) => {
-    config.resolve.fallback = { fs: false, tls: false };
-
-    return config;
-  },
+  }
 }
 
 module.exports = withPWA(
