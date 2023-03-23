@@ -17,6 +17,8 @@ export default function ConfirmationPage({ params }) {
     console.log("unpopulated similar records:");
     console.log(similar_records);
 
+    // FIXME: This stuff seems to run multiple times on page load, probably see here: https://stackoverflow.com/questions/71828419/rendering-html-response-from-api-in-react
+
     // TODO: gather similar records from the database
     fetch(
         "/api/gatherApplicants",
