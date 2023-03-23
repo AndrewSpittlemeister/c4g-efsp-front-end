@@ -7,7 +7,7 @@ const withPWA = require('next-pwa')({
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    'MYSQL_HOST': 'beatie.pdx1-mysql-a7-4a.dreamhost.com',
+    'MYSQL_HOST': 'db.unitedwayatlantaefsp.org',
     'MYSQL_DATABASE': 'unitedwayatlantaefsp',
     'MYSQL_USER': 'efsp_mngr',
     'MYSQL_PASSWORD':'TKL72wvu$',
