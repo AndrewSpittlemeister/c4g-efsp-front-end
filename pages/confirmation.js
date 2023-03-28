@@ -17,7 +17,7 @@ export default function ConfirmationPage({ params }) {
             async function getSimilarRecords() {
                 if (router.isReady) {
                     let records_res = await fetch(
-                        `/api/gatherSimilarRecords?dob=${data.dob}&lastname=${data.lastname}`,
+                        `/api/gatherSimilarRecords?dob=${data.applicantDOB}&lastname=${data.applicantLastName}`,
                         {
                             method: "GET",
                             headers: {
@@ -51,14 +51,28 @@ export default function ConfirmationPage({ params }) {
 
             <div className={styles.card}>
                 <h2>
-                    {`Pending Request for "${data.firstname} ${data.middlename} ${data.lastname}" (${data.email}) (${data.directIndirect})`}
+                    {`Pending Request for "${data.applicantFirstName} ${data.applicantMiddleName} ${data.applicantLastName}" (${data.directIndirect})`}
                 </h2>
                 <br></br>
-                <p>{`DOB: ${data.dob}`}</p>
-                <p>{`Agency: ${data.agencyname}`}</p>
+                <p>{`DOB: ${data.applicantDOB}`}</p>
+                <p>{`Address: ${data.applicantStreetAddress}, ${data.applicantCity} (${data.applicantPostalCode})`}</p>
+                <p>{`Agency: ${data.agencyName} (LRO #${data.lroNumber})`}</p>
                 <p>{`Jurisdiction: ${data.jurisdiction}`}</p>
-                <p>{`One Month Amount: \$${data.onemonthamt}`}</p>
-                <p>{`Service Amount: \$${data.serviceamt}`}</p>
+                <p>{`Funding Phase: ${data.fundingPhase}`}</p>
+                <p>{`Payment Vendor: ${data.paymentVendor}`}</p>
+                <p>{`Monthly Rent: $${data.monthlyRent}`}</p>
+                <p>{`Monthly Rent LRO: $${data.monthlyRentLRO}`}</p>
+                <p>{`Monthly Mortgage: $${data.monthlyMortgage}`}</p>
+                <p>{`Monthly Mortgage LRO: $${data.monthlyMortgageLRO}`}</p>
+                <p>{`Lodging Night Count: $${data.lodgingNightCount}`}</p>
+                <p>{`Lodging Night Cost: $${data.lodgingNightCost}`}</p>
+                <p>{`Lodging Night Cost LRO: $${data.lodgingNightCostLRO}`}</p>
+                <p>{`Monthly Gas: $${data.monthlyGas}`}</p>
+                <p>{`Monthly Gas LRO: $${data.monthlyGasLRO}`}</p>
+                <p>{`Monthly Electric: $${data.monthlyElectric}`}</p>
+                <p>{`Monthly Electric LRO: $${data.monthlyElectricLRO}`}</p>
+                <p>{`Monthly Water: $${data.monthlyWater}`}</p>
+                <p>{`Monthly Water LRO: $${data.monthlyWaterLRO}`}</p>
             </div>
 
             <div className={styles.card}>
@@ -81,13 +95,15 @@ export default function ConfirmationPage({ params }) {
                                         record.history.map(
                                             (application) => {
                                                 let totalFunding = application.MonthlyRentAmt + application.MonthlyMortgageAmt + application.MonthlyGasAmt + application.MonthlyElectricityAmt + application.MonthlyWaterAmt;
+                                                let totalFundingLRO = application.MonthyRentAmt_LRO + application.MonthlyMortgageAmt_LRO + application.MonthlyGasAmt_LRO + application.MonthlyElectricityAmt_LRO + application.MonthlyWaterAmt_LRO;
                                                 return (
                                                     <div key={application.ApplicationId} className={styles.card}>
                                                         <p>{`Date: ${application.RequestDate.split('T')[0]}`}</p>
                                                         <p>{`Jurisdiction: ${application.Jurisdiction}`}</p>
                                                         <p>{`Funding Phase: ${application.FundingPhase}`}</p>
-                                                        <p>{`Vendor: ${application.PaymentVendor}`}</p>
+                                                        <p>{`Payment Vendor: ${application.PaymentVendor}`}</p>
                                                         <p>{`Total Monthly Funding: $${totalFunding}`}</p>
+                                                        <p>{`Total Monthly Funding (LRO): $${totalFundingLRO}`}</p>
                                                     </div>
                                                 )
                                             }
