@@ -10,6 +10,7 @@ export default function ConfirmationPage({ params }) {
 
     // will be used to populate the similar records HTML data below
     const [similarRecordsResponse, setSimilarRecordsResponse] = useState([]);
+    const [addRecordResponse, setAddRecordResponse] = useState([]);
 
     // gather similar records from the database
     useEffect(
@@ -42,6 +43,54 @@ export default function ConfirmationPage({ params }) {
     // TODO: add callback for approve and deny buttons to either send data to database or kick back to form page.
 
     // TODO: add an alert when a request is approved
+    async function addApplication() {
+        if (router.isReady) {
+            let add_res = await fetch(
+                `/api/addApplication?applicantDOB=${data.applicantDOB}`
+                + `&applicantFirstName=${data.applicantFirstName}`
+                + `&applicantLastName=${data.applicantLastName}`
+                + `&applicantMiddleName=${data.applicantMiddleName}`
+                + `&applicantStreetAddress=${data.applicantStreetAddress}`
+                + `&applicantCity=${data.applicantCity}`
+                + `&applicantPostalCode=${data.applicantPostalCode}`
+                + `&applicantCountry=${data.applicantCountry}`
+                + `&lroNumber=${data.lroNumber}`
+                + `&agencyName=${data.agencyName}`
+                + `&lroEmail=${data.lroEmail}`
+                + `&fundingPhase=${data.fundingPhase}`
+                + `&jurisdiction=${data.jurisdiction}`
+                + `&paymentVendor=${data.paymentVendor}`
+                + `&monthlyRent=${data.monthlyRent}`
+                + `&monthlyRentLRO=${data.monthlyRentLRO}`
+                + `&monthlyMortgage=${data.monthlyMortgage}`
+                + `&monthlyMortgageLRO=${data.monthlyMortgageLRO}`
+                + `&lodgingNightCost=${data.lodgingNightCost}`
+                + `&lodgingNightCount=${data.lodgingNightCount}`
+                + `&lodgingNightCostLRO=${data.lodgingNightCostLRO}`
+                + `&monthlyGas=${data.monthlyGas}`
+                + `&monthlyGasLRO=${data.monthlyGasLRO}`
+                + `&monthlyElectric=${data.monthlyElectric}`
+                + `&monthlyElectricLRO=${data.monthlyElectricLRO}`
+                + `&monthlyWater=${data.monthlyWater}`
+                + `&monthlyWaterLRO=${data.monthlyWaterLRO}`
+                ,
+                {
+                    method: "POST",
+                    headers: {
+                        "accept": "application/json",
+                    },
+                },
+            );
+            let records = await add_res.json();
+            setAddRecordResponse(records);
+
+            console.log("Adding Application");
+            console.log(records);
+
+        } else {
+            setAddRecordResponse([false]);
+        }
+    }
 
     return (
         <main className={styles.main}>
@@ -114,7 +163,16 @@ export default function ConfirmationPage({ params }) {
                         }
                     )
                 }
+                
             </div>
+            <br></br>
+            <button className={styles.button} style={{margin: 'auto'}} onClick={() => addApplication()}>
+                Accept
+            </button>
+            <br></br>
+            <button className={styles.button} style={{margin: 'auto'}} onClick={() => router.push('/')}>
+                Reject
+            </button>
         </main>
     )
 }
