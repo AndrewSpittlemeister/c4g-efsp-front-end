@@ -10,7 +10,8 @@ export default function ConfirmationPage({ params }) {
 
     // will be used to populate the similar records HTML data below
     const [similarRecordsResponse, setSimilarRecordsResponse] = useState([]);
-    const [recordSubmitted, setRecordSubmitted] = useState(false);
+    const [confirmRejectPressed, setConfirmRejectPressed] = useState(false);
+    const [confirmRejectState, setConfirmRejectState] = useState(null);
     const [addRecordSuccess, setAddRecordSuccess] = useState(false);
 
     // gather similar records from the database
@@ -41,11 +42,8 @@ export default function ConfirmationPage({ params }) {
         [router.isReady, data.dob, data.lastname]
     );
 
-    // TODO: add callback for approve and deny buttons to either send data to database or kick back to form page.
-
     // TODO: add an alert when a request is approved
     async function addApplication() {
-        var recordSubmittedValue = false;
         var addRecordSuccessValue = false;
         if (router.isReady) {
             let add_res = await fetch(
@@ -85,97 +83,113 @@ export default function ConfirmationPage({ params }) {
                 },
             );
             let records = await add_res.json();
-            recordSubmittedValue = true;
             addRecordSuccessValue = records.result[0].success;
         }
-        setRecordSubmitted(recordSubmittedValue);
+        setConfirmRejectPressed(true);
+        setConfirmRejectState("Confirmed");
         setAddRecordSuccess(addRecordSuccessValue);
 
-        console.log(`Submitted: ${recordSubmittedValue} | Success: ${addRecordSuccessValue}`);
+        console.log(`Submitted, Success: ${addRecordSuccessValue}`);
+    }
+
+    async function processReject() {
+        setConfirmRejectPressed(true);
+        setConfirmRejectState("Rejected");
     }
 
     return (
-        <main className={styles.main}>
-            <h1>
-                Form Confirmation
-            </h1>
-            <p style={{marginLeft: 'auto', marginRight: 'auto', marginTop: "10px", marginBottom: "5px"}}>
-                Review the following application information before submitting.
-            </p>
-
-            <div className={styles.card}>
-                <h2>
-                    {`Pending Request for "${data.applicantFirstName} ${data.applicantMiddleName} ${data.applicantLastName}" (${data.directIndirect})`}
-                </h2>
-                <br></br>
-                <p>{`DOB: ${data.applicantDOB}`}</p>
-                <p>{`Address: ${data.applicantStreetAddress}, ${data.applicantCity} (${data.applicantPostalCode})`}</p>
-                <p>{`Agency: ${data.agencyName} (LRO #${data.lroNumber})`}</p>
-                <p>{`Jurisdiction: ${data.jurisdiction}`}</p>
-                <p>{`Funding Phase: ${data.fundingPhase}`}</p>
-                <p>{`Payment Vendor: ${data.paymentVendor}`}</p>
-                <p>{`Monthly Rent: $${data.monthlyRent}`}</p>
-                <p>{`Monthly Rent LRO: $${data.monthlyRentLRO}`}</p>
-                <p>{`Monthly Mortgage: $${data.monthlyMortgage}`}</p>
-                <p>{`Monthly Mortgage LRO: $${data.monthlyMortgageLRO}`}</p>
-                <p>{`Lodging Night Count: $${data.lodgingNightCount}`}</p>
-                <p>{`Lodging Night Cost: $${data.lodgingNightCost}`}</p>
-                <p>{`Lodging Night Cost LRO: $${data.lodgingNightCostLRO}`}</p>
-                <p>{`Monthly Gas: $${data.monthlyGas}`}</p>
-                <p>{`Monthly Gas LRO: $${data.monthlyGasLRO}`}</p>
-                <p>{`Monthly Electric: $${data.monthlyElectric}`}</p>
-                <p>{`Monthly Electric LRO: $${data.monthlyElectricLRO}`}</p>
-                <p>{`Monthly Water: $${data.monthlyWater}`}</p>
-                <p>{`Monthly Water LRO: $${data.monthlyWaterLRO}`}</p>
-            </div>
-
-            <div className={styles.card}>
-                <h2>
-                    {"Existing Similar Records"}
-                </h2>
-                <p style={{margin: 'auto', minWidth: '700px'}}>
-                    The following records show similar information, take a look at these to ensure there is no duplication of information before confirming the request.
+        confirmRejectPressed ? (
+            <main className={styles.main}>
+                <h1>Form Confirmation</h1>
+                <p style={{marginLeft: 'auto', marginRight: 'auto', marginTop: "10px", marginBottom: "5px"}}>
+                    {`Application Status: ${confirmRejectState}`}
                 </p>
                 <br></br>
-                {
-                    Object.keys(similarRecordsResponse).map(
-                        (name) => {
-                            let dob = similarRecordsResponse[name].dob;
-                            let history = similarRecordsResponse[name].history;
-                            console.log(`Found Similar Applicant: ${name} (DOB: ${dob})`);
-                            return (
-                                <div key={name}>
-                                    <h3>{`${name} (${dob})`}</h3>
-                                    {
-                                        history.map(
-                                            (application) => {
-                                                return (
-                                                    <div key={application.identity} className={styles.card}>
-                                                        <p>{`Date: ${application.date}`}</p>
-                                                        <p>{`Jurisdiction: ${application.jurisdiction}`}</p>
-                                                        <p>{`Funding Phase: ${application.fundingPhase}`}</p>
-                                                        <p>{`Agency: ${application.agency}`}</p>
-                                                        <p>{`Payment Vendor: ${application.paymentVendor}`}</p>
-                                                        <p>{`Total Monthly Funding: $${application.totalFunding}`}</p>
-                                                        <p>{`Total Monthly Funding (LRO): $${application.totalFundingLRO}`}</p>
-                                                    </div>
-                                                )
-                                            }
-                                        )
-                                    }
-                                </div>
-                            )
-                        }
-                    )
-                }
-            </div>
-            <br></br>
-            <button className={styles.button} style={{marginLeft: 'auto', marginRight: 'auto', marginTop: "10px", marginBottom: "5px"}} onClick={() => addApplication()}>
-                Accept
-            </button>
-            <button className={styles.button} style={{marginLeft: 'auto', marginRight: 'auto', marginTop: "5px", marginBottom: "5px"}} onClick={() => router.push('/')}>
-                Reject
-            </button>
-        </main>
+                <button className={styles.button} style={{marginLeft: 'auto', marginRight: 'auto', marginTop: "10px", marginBottom: "5px"}} onClick={() => router.push('/')}>
+                    Return Home
+                </button>
+            </main>
+        ) : (
+            <main className={styles.main}>
+                <h1>Form Confirmation</h1>
+                <p style={{marginLeft: 'auto', marginRight: 'auto', marginTop: "10px", marginBottom: "5px"}}>
+                    Review the following application information before submitting.
+                </p>
+
+                <div className={styles.card}>
+                    <h2>
+                        {`Pending Request for "${data.applicantFirstName} ${data.applicantMiddleName} ${data.applicantLastName}" (${data.directIndirect})`}
+                    </h2>
+                    <br></br>
+                    <p>{`DOB: ${data.applicantDOB}`}</p>
+                    <p>{`Address: ${data.applicantStreetAddress}, ${data.applicantCity} (${data.applicantPostalCode})`}</p>
+                    <p>{`Agency: ${data.agencyName} (LRO #${data.lroNumber})`}</p>
+                    <p>{`Jurisdiction: ${data.jurisdiction}`}</p>
+                    <p>{`Funding Phase: ${data.fundingPhase}`}</p>
+                    <p>{`Payment Vendor: ${data.paymentVendor}`}</p>
+                    <p>{`Monthly Rent: $${data.monthlyRent}`}</p>
+                    <p>{`Monthly Rent LRO: $${data.monthlyRentLRO}`}</p>
+                    <p>{`Monthly Mortgage: $${data.monthlyMortgage}`}</p>
+                    <p>{`Monthly Mortgage LRO: $${data.monthlyMortgageLRO}`}</p>
+                    <p>{`Lodging Night Count: $${data.lodgingNightCount}`}</p>
+                    <p>{`Lodging Night Cost: $${data.lodgingNightCost}`}</p>
+                    <p>{`Lodging Night Cost LRO: $${data.lodgingNightCostLRO}`}</p>
+                    <p>{`Monthly Gas: $${data.monthlyGas}`}</p>
+                    <p>{`Monthly Gas LRO: $${data.monthlyGasLRO}`}</p>
+                    <p>{`Monthly Electric: $${data.monthlyElectric}`}</p>
+                    <p>{`Monthly Electric LRO: $${data.monthlyElectricLRO}`}</p>
+                    <p>{`Monthly Water: $${data.monthlyWater}`}</p>
+                    <p>{`Monthly Water LRO: $${data.monthlyWaterLRO}`}</p>
+                </div>
+
+                <div className={styles.card}>
+                    <h2>
+                        {"Existing Similar Records"}
+                    </h2>
+                    <p style={{margin: 'auto', minWidth: '700px'}}>
+                        The following records show similar information, take a look at these to ensure there is no duplication of information before confirming the request.
+                    </p>
+                    <br></br>
+                    {
+                        Object.keys(similarRecordsResponse).map(
+                            (name) => {
+                                let dob = similarRecordsResponse[name].dob;
+                                let history = similarRecordsResponse[name].history;
+                                console.log(`Found Similar Applicant: ${name} (DOB: ${dob})`);
+                                return (
+                                    <div key={name}>
+                                        <h3>{`${name} (${dob})`}</h3>
+                                        {
+                                            history.map(
+                                                (application) => {
+                                                    return (
+                                                        <div key={application.identity} className={styles.card}>
+                                                            <p>{`Date: ${application.date}`}</p>
+                                                            <p>{`Jurisdiction: ${application.jurisdiction}`}</p>
+                                                            <p>{`Funding Phase: ${application.fundingPhase}`}</p>
+                                                            <p>{`Agency: ${application.agency}`}</p>
+                                                            <p>{`Payment Vendor: ${application.paymentVendor}`}</p>
+                                                            <p>{`Total Monthly Funding: $${application.totalFunding}`}</p>
+                                                            <p>{`Total Monthly Funding (LRO): $${application.totalFundingLRO}`}</p>
+                                                        </div>
+                                                    )
+                                                }
+                                            )
+                                        }
+                                    </div>
+                                )
+                            }
+                        )
+                    }
+                </div>
+                <br></br>
+                <button className={styles.button} style={{marginLeft: 'auto', marginRight: 'auto', marginTop: "10px", marginBottom: "5px"}} onClick={() => addApplication()}>
+                    Accept
+                </button>
+                <button className={styles.button} style={{marginLeft: 'auto', marginRight: 'auto', marginTop: "5px", marginBottom: "5px"}} onClick={() => processReject()}>
+                    Reject
+                </button>
+            </main>
+        )
     )
 }
