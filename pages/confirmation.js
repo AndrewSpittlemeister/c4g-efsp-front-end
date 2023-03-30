@@ -10,7 +10,8 @@ export default function ConfirmationPage({ params }) {
 
     // will be used to populate the similar records HTML data below
     const [similarRecordsResponse, setSimilarRecordsResponse] = useState([]);
-    const [addRecordResponse, setAddRecordResponse] = useState([]);
+    const [recordSubmitted, setRecordSubmitted] = useState(false);
+    const [addRecordSuccess, setAddRecordSuccess] = useState(false);
 
     // gather similar records from the database
     useEffect(
@@ -44,6 +45,8 @@ export default function ConfirmationPage({ params }) {
 
     // TODO: add an alert when a request is approved
     async function addApplication() {
+        var recordSubmittedValue = false;
+        var addRecordSuccessValue = false;
         if (router.isReady) {
             let add_res = await fetch(
                 `/api/addApplication?applicantDOB=${data.applicantDOB}`
@@ -82,14 +85,13 @@ export default function ConfirmationPage({ params }) {
                 },
             );
             let records = await add_res.json();
-            setAddRecordResponse(records);
-
-            console.log("Adding Application");
-            console.log(records);
-
-        } else {
-            setAddRecordResponse([false]);
+            recordSubmittedValue = true;
+            addRecordSuccessValue = records.result[0].success;
         }
+        setRecordSubmitted(recordSubmittedValue);
+        setAddRecordSuccess(addRecordSuccessValue);
+
+        console.log(`Submitted: ${recordSubmittedValue} | Success: ${addRecordSuccessValue}`);
     }
 
     return (
@@ -97,7 +99,9 @@ export default function ConfirmationPage({ params }) {
             <h1>
                 Form Confirmation
             </h1>
-            <p style={{marginLeft: 'auto', marginRight: 'auto', marginTop: "10px", marginBottom: "5px"}}>Review the following application information before submitting.</p>
+            <p style={{marginLeft: 'auto', marginRight: 'auto', marginTop: "10px", marginBottom: "5px"}}>
+                Review the following application information before submitting.
+            </p>
 
             <div className={styles.card}>
                 <h2>
