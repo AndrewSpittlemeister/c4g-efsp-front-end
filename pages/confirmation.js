@@ -97,6 +97,7 @@ export default function ConfirmationPage({ params }) {
             <h1>
                 Form Confirmation
             </h1>
+            <p style={{marginLeft: 'auto', marginRight: 'auto', marginTop: "10px", marginBottom: "5px"}}>Review the following application information before submitting.</p>
 
             <div className={styles.card}>
                 <h2>
@@ -128,31 +129,31 @@ export default function ConfirmationPage({ params }) {
                 <h2>
                     {"Existing Similar Records"}
                 </h2>
-                <p style={{margin: 'auto', minWidth: '500px'}}>
+                <p style={{margin: 'auto', minWidth: '700px'}}>
                     The following records show similar information, take a look at these to ensure there is no duplication of information before confirming the request.
                 </p>
                 <br></br>
                 {
-                    similarRecordsResponse.map(
-                        (record) => {
-                            console.log("RECORD:");
-                            console.log(record);
+                    Object.keys(similarRecordsResponse).map(
+                        (name) => {
+                            let dob = similarRecordsResponse[name].dob;
+                            let history = similarRecordsResponse[name].history;
+                            console.log(`Found Similar Applicant: ${name} (DOB: ${dob})`);
                             return (
-                                <div key={record.name}>
-                                    <h3>{`${record.name} (${record.dob})`}</h3>
+                                <div key={name}>
+                                    <h3>{`${name} (${dob})`}</h3>
                                     {
-                                        record.history.map(
+                                        history.map(
                                             (application) => {
-                                                let totalFunding = application.MonthlyRentAmt + application.MonthlyMortgageAmt + application.MonthlyGasAmt + application.MonthlyElectricityAmt + application.MonthlyWaterAmt;
-                                                let totalFundingLRO = application.MonthyRentAmt_LRO + application.MonthlyMortgageAmt_LRO + application.MonthlyGasAmt_LRO + application.MonthlyElectricityAmt_LRO + application.MonthlyWaterAmt_LRO;
                                                 return (
-                                                    <div key={application.ApplicationId} className={styles.card}>
-                                                        <p>{`Date: ${application.RequestDate.split('T')[0]}`}</p>
-                                                        <p>{`Jurisdiction: ${application.Jurisdiction}`}</p>
-                                                        <p>{`Funding Phase: ${application.FundingPhase}`}</p>
-                                                        <p>{`Payment Vendor: ${application.PaymentVendor}`}</p>
-                                                        <p>{`Total Monthly Funding: $${totalFunding}`}</p>
-                                                        <p>{`Total Monthly Funding (LRO): $${totalFundingLRO}`}</p>
+                                                    <div key={application.identity} className={styles.card}>
+                                                        <p>{`Date: ${application.date}`}</p>
+                                                        <p>{`Jurisdiction: ${application.jurisdiction}`}</p>
+                                                        <p>{`Funding Phase: ${application.fundingPhase}`}</p>
+                                                        <p>{`Agency: ${application.agency}`}</p>
+                                                        <p>{`Payment Vendor: ${application.paymentVendor}`}</p>
+                                                        <p>{`Total Monthly Funding: $${application.totalFunding}`}</p>
+                                                        <p>{`Total Monthly Funding (LRO): $${application.totalFundingLRO}`}</p>
                                                     </div>
                                                 )
                                             }
@@ -163,14 +164,12 @@ export default function ConfirmationPage({ params }) {
                         }
                     )
                 }
-                
             </div>
             <br></br>
-            <button className={styles.button} style={{margin: 'auto'}} onClick={() => addApplication()}>
+            <button className={styles.button} style={{marginLeft: 'auto', marginRight: 'auto', marginTop: "10px", marginBottom: "5px"}} onClick={() => addApplication()}>
                 Accept
             </button>
-            <br></br>
-            <button className={styles.button} style={{margin: 'auto'}} onClick={() => router.push('/')}>
+            <button className={styles.button} style={{marginLeft: 'auto', marginRight: 'auto', marginTop: "5px", marginBottom: "5px"}} onClick={() => router.push('/')}>
                 Reject
             </button>
         </main>

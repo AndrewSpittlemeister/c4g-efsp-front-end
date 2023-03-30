@@ -5,34 +5,42 @@ export default async function handler(req, res) {
     console.log("inGatherSimilarRecords with query params:");
     console.log(req.query);
 
-    let similarRecords = [];
+    let req_lastname = req.query.lastname.toLowerCase().trim();
+    let req_dob = req.query.dob.trim();
+
+    let similarRecords = {};
     try {
-        let applicant_db_result = await executeQuery(
+        let db_result = await executeQuery(
             {
-                query: 'select * from Applicant'
+                query: "select * from Application_Applicant_LRO"
             }
         );
 
-        console.log(applicant_db_result);
-        for (const applicant of applicant_db_result) {
-            let applicant_dob = JSON.stringify(applicant.DOB).split("T")[0].replaceAll('"', '');
-            let applicant_lastname = applicant.LastName;
+        for (const record of db_result) {
+            let rec_dob = JSON.stringify(record.DOB).split("T")[0].replaceAll('"', '');
+            let rec_lastname = record.LastName.toLowerCase().trim();
 
-            if ((applicant_dob == req.query.dob) || (applicant_lastname == req.query.lastname)) {
-                let application_db_result = await executeQuery(
-                    {
-                        query: "select * from Application WHERE ApplicantId = ?",
-                        values: [applicant.ApplicantId]
-                    }
-                );
-                if (applicant_db_result.length > 0) {
-                    similarRecords.push(
-                        {
-                            name: `${applicant.FirstName} ${applicant.MiddleName} ${applicant.LastName}`,
-                            dob: applicant_dob,
-                            history: application_db_result
-                        }
-                    );
+            if ((rec_dob == req_dob) || (rec_lastname == req_lastname)) {
+                let name = `${record.FirstName} ${record.MiddleName} ${record.LastName}`;
+                let app_info = {
+                    identity: record.ApplicationId,
+                    date: JSON.stringify(record.RequestDate).split("T")[0].replaceAll('"', ''),
+                    jurisdiction: record.Jurisdiction,
+                    fundingPhase: record.FundingPhase,
+                    agency: `${record.LROAgencyName} (LRO #${record.LRONumber})`,
+                    paymentVendor: record.PaymentVendor,
+                    totalFunding: record.MonthlyRentAmt + record.MonthlyMortgageAmt + record.MonthlyGasAmt + record.MonthlyElectricityAmt + record.MonthlyWaterAmt,
+                    totalFundingLRO: record.MonthyRentAmt_LRO + record.MonthlyMortgageAmt_LRO + record.MonthlyGasAmt_LRO + record.MonthlyElectricityAmt_LRO + record.MonthlyWaterAmt_LRO,
+                }
+
+                if (similarRecords.hasOwnProperty(name)) {
+                    similarRecords[name].history.push(app_info);
+                } else {
+                    console.log(`Found Similar Applicant: ${name} (DOB: ${rec_dob})`);
+                    similarRecords[name] = {
+                        dob: rec_dob,
+                        history: [app_info]
+                    };
                 }
             }
         }
