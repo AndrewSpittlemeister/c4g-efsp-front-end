@@ -15,9 +15,13 @@ export default NextAuth({
     secret: "secret token",
     //Callback here
     callbacks: {
-        async jwt(token, account) {
-            if (account?.accessToken) {
-                token.accessToken = account.accessToken
+        async session({ session, token }) {
+            session.user = token.user;
+            return session;
+        },
+        async jwt({ token, user }) {
+            if (user) {
+                token.user = user;
             }
             return token;
         },
