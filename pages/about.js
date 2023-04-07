@@ -129,19 +129,19 @@ export default function AboutPage() {
         <div className={styles.card}>
           <h2 style={{margin: 'auto'}}>Project Overview Presentation</h2>
           <br></br>
-          <p className={"nav__menu-list"} style={{margin: 'auto'}}>
+          <button className={styles.button} style={{margin: 'auto'}}>
             <Link href={"https://gtvault-my.sharepoint.com/:b:/g/personal/aws3_gatech_edu/EZYxFD0lUUtBuHNpYNKPTEABk-LKQPHTRXvv17vPIYWG0g?e=ZfAMPM"}>{"Presentation Slides Link"}</Link>
-          </p>
+          </button>
           <br></br>
-          <p className={"nav__menu-list"} style={{margin: 'auto'}}>
+          <button className={styles.button} style={{margin: 'auto'}}>
             <Link href={"https://gtvault-my.sharepoint.com/:v:/g/personal/aws3_gatech_edu/EaXFcW3I-39LplIYwZwvBVcB3J0pgz3hu3tcdVWkyYVT8w?e=XC2KKr"}>{"Presentation Video Link"}</Link>
-          </p>
+          </button>
         </div>
 
         <div className={styles.card}>
           <h2 style={{margin: 'auto'}}>Project Peer Evaluations Section</h2>
           <br></br>
-          <p style={{margin: 'auto', minWidth: '500px'}}>
+          <p style={{margin: 'auto'}}>
             This temporary section is intended for peers in the Georgia Tech C4G group. The link to the survey can be found below and in the navbar. This survey will require authentication
             as part of the tasking, a temporary account has been created for this use, the credentials are below (note that this does not gain access to any sensitive or even real information):
             <br></br>
@@ -151,9 +151,9 @@ export default function AboutPage() {
             Password: United+Way+Atlanta+2023
           </p>
           <br></br>
-          <p className={"nav__menu-list"} style={{margin: 'auto'}}>
+          <button className={styles.button} style={{margin: 'auto'}}>
             <Link href={"https://forms.office.com/Pages/ResponsePage.aspx?id=u5ghSHuuJUuLem1_Mvqgg77XCbGawB9Gl_Mb2IsliK9UQ0tBTjQzNk1PWFA1R0FTUEQyRFRTNkdQQS4u"}>{"Survey"}</Link>
-          </p>
+          </button>
         </div>
       </main>
     </>
