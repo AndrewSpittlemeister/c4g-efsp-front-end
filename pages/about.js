@@ -139,20 +139,10 @@ export default function AboutPage() {
         </div>
 
         <div className={styles.card}>
-          <h2 style={{margin: 'auto'}}>Project Peer Evaluations Section</h2>
-          <br></br>
-          <p style={{margin: 'auto'}}>
-            This temporary section is intended for peers in the Georgia Tech C4G group. The link to the survey can be found below and in the navbar. This survey will require authentication
-            as part of the tasking, a temporary account has been created for this use, the credentials are below (note that this does not gain access to any sensitive or even real information):
-            <br></br>
-            <br></br>
-            Email: c4g.efsp.test@gmail.com
-            <br></br>
-            Password: United+Way+Atlanta+2023
-          </p>
+          <h2 style={{margin: 'auto'}}>Project Demo Video</h2>
           <br></br>
           <button className={styles.button} style={{margin: 'auto'}}>
-            <Link href={"https://forms.office.com/Pages/ResponsePage.aspx?id=u5ghSHuuJUuLem1_Mvqgg77XCbGawB9Gl_Mb2IsliK9UQ0tBTjQzNk1PWFA1R0FTUEQyRFRTNkdQQS4u"}>{"Survey"}</Link>
+            <Link href={"https://gtvault-my.sharepoint.com/:v:/g/personal/aws3_gatech_edu/EWfXQtqruUJLpxQ6aMU46TABbUKkOIb7ryLkuSFuHq-UrA?e=J6us2i"}>{"Demo Video Link"}</Link>
           </button>
         </div>
       </main>
