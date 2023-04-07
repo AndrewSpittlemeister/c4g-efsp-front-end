@@ -4,11 +4,19 @@ import React, { useEffect, useState, useMemo } from "react"
 import { useSession } from "next-auth/react"
 import { useRouter } from 'next/router';
 import getUserRole from "@/lib/users";
-import { useTable, useFilters, useGlobalFilter, useAsyncDebounce, useSortBy } from 'react-table'
+import { useTable, useFilters, useGlobalFilter, useAsyncDebounce, useSortBy, usePagination } from 'react-table'
 
 const Styles = styled.div`
   padding: 1rem;
 
+  div {
+    button {
+        font-size:10 rem;
+        padding: 0.5rem;
+        margin-bottom: 2rem;
+        align-items: right;
+    }
+  }
   table {
     border-spacing: 0;
     border: 1px solid black;
@@ -32,6 +40,10 @@ const Styles = styled.div`
         border-right: 0;
       }
     }
+  }
+
+  .pagination {
+    padding: 0.5rem;
   }
   `
 
@@ -66,7 +78,6 @@ function SliderColumnFilter({
         </>
     )
 }
-
 
 function SelectColumnFilter({
     column: { filterValue, setFilter, preFilteredRows, id },
@@ -155,33 +166,47 @@ function Table({ columns, data }) {
         []
     )
 
+
     const {
         getTableProps,
         getTableBodyProps,
         headerGroups,
-        rows,
+        page, // Instead of using 'rows', we'll use page,
+        // which has only the rows for the active page
+        // The rest of these things are super handy, too ;)
+        canPreviousPage,
+        canNextPage,
+        pageOptions,
+        pageCount,
+        gotoPage,
+        nextPage,
+        previousPage,
+        setPageSize,
         prepareRow,
-        state,
         visibleColumns,
         preGlobalFilteredRows,
         setGlobalFilter,
+        state: { pageIndex, pageSize, filters, globalFilter },
+        setAllFilters,
     } = useTable(
         {
             columns,
             data,
             defaultColumn, // Be sure to pass the defaultColumn option
+            initialState: { pageIndex: 0 },
+            autoResetFilters: true,
         },
         useFilters, // useFilters!
         useGlobalFilter, // useGlobalFilter!
         useSortBy,
+        usePagination
     )
-
-    // We don't want to render all 2000 rows for this example, so cap
-    // it at 20 for this use case
-    const firstPageRows = rows.slice(0, 20)
 
     return (
         <>
+            <div>
+                <button onClick={() => setAllFilters([])}>Reset All Filters</button>
+            </div>
             <table {...getTableProps()}>
                 <thead>
                     {headerGroups.map(headerGroup => (
@@ -226,14 +251,14 @@ function Table({ columns, data }) {
                         >
                             <GlobalFilter
                                 preGlobalFilteredRows={preGlobalFilteredRows}
-                                globalFilter={state.globalFilter}
+                                globalFilter={globalFilter}
                                 setGlobalFilter={setGlobalFilter}
                             />
                         </th>
                     </tr>
                 </thead>
                 <tbody {...getTableBodyProps()}>
-                    {firstPageRows.map(
+                    {page.map(
                         (row, i) => {
                             prepareRow(row);
                             return (
@@ -250,10 +275,68 @@ function Table({ columns, data }) {
                 </tbody>
             </table>
             <br />
-            <div>Showing the first {rows.length <= 20 ? rows.length : 20} results of {rows.length} entries</div>
+            {/* <div>Showing the first {rows.length <= 20 ? rows.length : 20} results of {rows.length} entries</div> */}
+
+            <div className="pagination">
+                <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+                    {'<<'}
+                </button>{' '}
+                <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+                    {'<'}
+                </button>{' '}
+                <button onClick={() => nextPage()} disabled={!canNextPage}>
+                    {'>'}
+                </button>{' '}
+                <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+                    {'>>'}
+                </button>{' '}
+                <span>
+                    Page{' '}
+                    <strong>
+                        {pageIndex + 1} of {pageOptions.length}
+                    </strong>{' '}
+                </span>
+                <span>
+                    | Go to page:{' '}
+                    <input
+                        type="number"
+                        defaultValue={pageIndex + 1}
+                        onChange={e => {
+                            const page = e.target.value ? Number(e.target.value) - 1 : 0
+                            gotoPage(page)
+                        }}
+                        style={{ width: '100px' }}
+                    />
+                </span>{' '}
+                <select
+                    value={pageSize}
+                    onChange={e => {
+                        setPageSize(Number(e.target.value))
+                    }}
+                >
+                    {[10, 20, 30, 40, 50].map(pageSize => (
+                        <option key={pageSize} value={pageSize}>
+                            Show {pageSize}
+                        </option>
+                    ))}
+                </select>
+            </div>
             <div>
                 <pre>
-                    <code>{console.log(JSON.stringify(state.filters, null, 2))}</code>
+                    <code>{console.log(JSON.stringify(filters, null, 2))}</code>
+                    <code>
+                        {console.log(JSON.stringify(
+                            {
+                                pageIndex,
+                                pageSize,
+                                pageCount,
+                                canNextPage,
+                                canPreviousPage,
+                            },
+                            null,
+                            2
+                        ))}
+                    </code>
                 </pre>
             </div>
         </>
