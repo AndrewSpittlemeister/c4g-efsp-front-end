@@ -420,6 +420,10 @@ export default function ConfirmationPage({ params }) {
                         Header: 'Postal Code',
                         accessor: 'PostalCode',
                     },
+                    {
+                        Header: 'Application Date',
+                        accessor: 'RequestDate',
+                    },
                 ],
             },
             {
