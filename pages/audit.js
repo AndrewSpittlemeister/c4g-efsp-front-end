@@ -8,6 +8,7 @@ import { useTable, useFilters, useGlobalFilter, useAsyncDebounce, useSortBy, use
 
 const Styles = styled.div`
   padding: 1rem;
+  flex-direction: left;
 
   div {
     button {
@@ -367,8 +368,8 @@ export default function ConfirmationPage({ params }) {
                 Header: 'ID',
                 columns: [
                     {
-                        Header: 'Applicant ID',
-                        accessor: 'ApplicantId',
+                        Header: 'Application ID',
+                        accessor: 'ApplicationId',
                         Filter: SliderColumnFilter,
                         filter: filterGreaterThan,
                     },
@@ -399,6 +400,10 @@ export default function ConfirmationPage({ params }) {
                         accessor: 'DOB',
                     },
                     {
+                        Header: 'Street Address',
+                        accessor: 'StreetAddress',
+                    },
+                    {
                         Header: 'City',
                         accessor: 'City',
                         Filter: SelectColumnFilter,
@@ -414,9 +419,91 @@ export default function ConfirmationPage({ params }) {
                         Header: 'Postal Code',
                         accessor: 'PostalCode',
                     },
+                ],
+            },
+            {
+                Header: 'Agency Information',
+                columns: [
                     {
-                        Header: 'Street Address',
-                        accessor: 'StreetAddress',
+                        Header: 'LRO Number',
+                        accessor: 'LRONumber',
+                    },
+                    {
+                        Header: 'Agency Name',
+                        accessor: 'LROAgencyName',
+                    },
+                    {
+                        Header: 'Agency Email',
+                        accessor: 'LROEmail',
+                    },
+                    {
+                        Header: 'Jurisdiction',
+                        accessor: 'Jurisdiction',
+                    },
+                ],
+            },
+            {
+                Header: 'Funding Information',
+                columns: [
+                    {
+                        Header: 'Payment Vendor',
+                        accessor: 'PaymentVendor',
+                    },
+                    {
+                        Header: 'Funding Phase',
+                        accessor: 'FundingPhase',
+                    },
+                    {
+                        Header: 'Monthly Rent ($)',
+                        accessor: 'MonthlyRentAmt',
+                    },
+                    {
+                        Header: 'LRO Monthly Rent ($)',
+                        accessor: 'MonthyRentAmt_LRO',
+                    },
+                    {
+                        Header: 'Monthly Mortgage ($)',
+                        accessor: 'MonthlyMortgageAmt',
+                    },
+                    {
+                        Header: 'LRO Monthly Mortgage ($)',
+                        accessor: 'MonthlyMortgageAmt_LRO',
+                    },
+                    {
+                        Header: 'Lodging Night Count',
+                        accessor: 'LodgingNightCount',
+                    },
+                    {
+                        Header: 'Lodging Nightly Cost ($)',
+                        accessor: 'LodgingCostPerNight',
+                    },
+                    {
+                        Header: 'LRO Lodging Nightly Cost ($)',
+                        accessor: 'LodgingCostPerNight_LRO',
+                    },
+                    {
+                        Header: 'Monthly Gas ($)',
+                        accessor: 'MonthlyGasAmt',
+                    },
+                    {
+                        Header: 'LRO Monthly Gas ($)',
+                        accessor: 'MonthlyGasAmt_LRO',
+                    },
+                    {
+                        Header: 'Monthly Electric ($)',
+                        accessor: 'MonthlyElectricityAmt',
+                    },
+                    {
+                        Header: 'LRO Monthly Electric ($)',
+                        accessor: 'MonthlyElectricityAmt_LRO',
+                    },
+                    {
+                        Header: 'Monthly Water ($)',
+                        accessor: 'MonthlyWaterAmt',
+                    },
+                    {
+                        Header: 'LRO Monthly Water ($)',
+                        accessor: 'MonthlyWaterAmt_LRO',
                     },
                 ],
             },
@@ -440,7 +527,7 @@ export default function ConfirmationPage({ params }) {
                 if (router.isReady) {
 
                     let records_res = await fetch(
-                        `/api/gatherApplicants`,
+                        `/api/gatherAllRecords`,
                         {
                             method: "GET",
                             headers: {
@@ -493,7 +580,7 @@ export default function ConfirmationPage({ params }) {
             )
         } else {
             return (
-                <main className={styles.main}>
+                <main className={styles.auditmain}>
                     <h1>Audit Records</h1>
                     <Styles>
                         <Table columns={columns} data={allRecords} />
