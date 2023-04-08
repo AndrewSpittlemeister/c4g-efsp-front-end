@@ -19,7 +19,12 @@ export default async function handler(req, res) {
         for (const record of db_result) {
             let rec_lastname = record.LastName.toLowerCase().trim();
             var dist = calculate_distance(req_lastname, rec_lastname);
-            let rec_dob = JSON.stringify(record.DOB).split("T")[0].replaceAll('"', '');
+            var rec_dob = "";
+            try {
+                rec_dob = JSON.stringify(record.DOB).split("T")[0].replaceAll('"', '');
+            } catch ( e ) {
+                console.log(`failed to parse DOB: ${e}`);
+            }
 
             if ((rec_dob == req_dob) || (rec_lastname == req_lastname) || dist < 4) {
                 let name = `${record.FirstName} ${record.MiddleName} ${record.LastName}`;
@@ -57,34 +62,33 @@ export default async function handler(req, res) {
 function calculate_distance(a, b) {
     if(a.length == 0) return b.length; 
     if(b.length == 0) return a.length; 
-  
+
     var matrix = [];
-  
+
     // increment along the first column of each row
     var i;
     for(i = 0; i <= b.length; i++){
-      matrix[i] = [i];
+        matrix[i] = [i];
     }
-  
+
     // increment each column in the first row
     var j;
     for(j = 0; j <= a.length; j++){
-      matrix[0][j] = j;
+        matrix[0][j] = j;
     }
-  
+
     // Fill in the rest of the matrix
     for(i = 1; i <= b.length; i++){
-      for(j = 1; j <= a.length; j++){
-        if(b.charAt(i-1) == a.charAt(j-1)){
-          matrix[i][j] = matrix[i-1][j-1];
-        } else {
-          matrix[i][j] = Math.min(matrix[i-1][j-1] + 1, // substitution
-                                  Math.min(matrix[i][j-1] + 1, // insertion
-                                           matrix[i-1][j] + 1)); // deletion
+        for(j = 1; j <= a.length; j++){
+            if(b.charAt(i-1) == a.charAt(j-1)){
+            matrix[i][j] = matrix[i-1][j-1];
+            } else {
+            matrix[i][j] = Math.min(matrix[i-1][j-1] + 1, // substitution
+                                    Math.min(matrix[i][j-1] + 1, // insertion
+                                            matrix[i-1][j] + 1)); // deletion
+            }
         }
-      }
     }
     console.log("Levenshtein distance: " + matrix[b.length][a.length]);
     return matrix[b.length][a.length];
-  };
-  
+};
