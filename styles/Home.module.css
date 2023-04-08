@@ -17,8 +17,27 @@
   overflow-x: scroll;
   font-family: var(--font-mono);
   font-size: 16px;
-  
 }
+
+.auditmain {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  padding: 6rem;
+  justify-items: center;
+  margin: 0px;
+  overflow-x: scroll;
+  font-family: var(--font-mono);
+  font-size: 16px;
+}
+
+.auditmain h1 {
+  text-decoration: dashed;
+  font-weight: 700;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  margin-top: 3rem;
+}
+
 
 .main h1 {
   text-decoration: dashed;

@@ -17,7 +17,7 @@ button below.\
 
 export default function Home() {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
 
   <Head>
@@ -31,7 +31,7 @@ export default function Home() {
         <h1>{WELCOME_MESSAGE}</h1>
         <div className={styles.card}>{WELCOME_PROMPT}</div>
         {
-          session ? (
+          status == "authenticated" ? (
             <div className={styles.card}>
               <p>
                 Click below to display a form for submitting a new application.
