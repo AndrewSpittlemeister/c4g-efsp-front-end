@@ -210,12 +210,12 @@ function Table({ columns, data }) {
             </div>
             <table {...getTableProps()}>
                 <thead>
-                    {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map(column => (
+                    {headerGroups.map((headerGroup, i) => (
+                        <tr {...headerGroup.getHeaderGroupProps()} key={i}>
+                            {headerGroup.headers.map((column, j) => (
                                 // Add the sorting props to control sorting. For this example
                                 // we can add them into the header props
-                                <th {...column.getHeaderProps(column.getSortByToggleProps())}>
+                                <th {...column.getHeaderProps(column.getSortByToggleProps())} key={j}>
                                     {column.render('Header')}
                                     {/* Add a sort direction indicator */}
                                     <span>
@@ -233,10 +233,10 @@ function Table({ columns, data }) {
                         </tr>
                     ))}
 
-                    {headerGroups.map(headerGroup => (
-                        <tr {...headerGroup.getHeaderGroupProps()}>
-                            {headerGroup.headers.map(column => (
-                                <th {...column.getHeaderProps()}>
+                    {headerGroups.map((headerGroup, i) => (
+                        <tr {...headerGroup.getHeaderGroupProps()} key={i}>
+                            {headerGroup.headers.map((column, j) => (
+                                <th {...column.getHeaderProps()} key={j}>
                                     {/* Render the columns filter UI */}
                                     <div>{column.canFilter ? column.render('Filter') : null}</div>
                                 </th>
@@ -263,10 +263,10 @@ function Table({ columns, data }) {
                         (row, i) => {
                             prepareRow(row);
                             return (
-                                <tr {...row.getRowProps()}>
-                                    {row.cells.map(cell => {
+                                <tr {...row.getRowProps()} key={i}>
+                                    {row.cells.map((cell, j) => {
                                         return (
-                                            <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+                                            <td {...cell.getCellProps()} key={j}>{cell.render('Cell')}</td>
                                         )
                                     })}
                                 </tr>
