@@ -129,21 +129,21 @@ export default function AboutPage() {
         <div className={styles.card}>
           <h2 style={{margin: 'auto'}}>Project Overview Presentation</h2>
           <br></br>
-          <p className={"nav__menu-list"} style={{margin: 'auto'}}>
+          <button className={styles.button} style={{margin: 'auto'}}>
             <Link href={"https://gtvault-my.sharepoint.com/:b:/g/personal/aws3_gatech_edu/EZYxFD0lUUtBuHNpYNKPTEABk-LKQPHTRXvv17vPIYWG0g?e=ZfAMPM"}>{"Presentation Slides Link"}</Link>
-          </p>
+          </button>
           <br></br>
-          <p className={"nav__menu-list"} style={{margin: 'auto'}}>
+          <button className={styles.button} style={{margin: 'auto'}}>
             <Link href={"https://gtvault-my.sharepoint.com/:v:/g/personal/aws3_gatech_edu/EaXFcW3I-39LplIYwZwvBVcB3J0pgz3hu3tcdVWkyYVT8w?e=XC2KKr"}>{"Presentation Video Link"}</Link>
-          </p>
+          </button>
         </div>
 
         <div className={styles.card}>
           <h2 style={{margin: 'auto'}}>Project Demo Video</h2>
           <br></br>
-          <p className={"nav__menu-list"} style={{margin: 'auto'}}>
+          <button className={styles.button} style={{margin: 'auto'}}>
             <Link href={"https://gtvault-my.sharepoint.com/:v:/g/personal/aws3_gatech_edu/EWfXQtqruUJLpxQ6aMU46TABbUKkOIb7ryLkuSFuHq-UrA?e=J6us2i"}>{"Demo Video Link"}</Link>
-          </p>
+          </button>
         </div>
       </main>
     </>

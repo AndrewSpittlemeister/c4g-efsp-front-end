@@ -12,10 +12,9 @@
   flex-direction: column;
   align-items: center;
   padding: 6rem;
-  min-height: 100vh;
-  min-width: 100vh;
   justify-items: center;
   margin: 0px;
+  overflow-x: scroll;
   font-family: var(--font-mono);
   font-size: 16px;
   
@@ -32,6 +31,7 @@
   border-collapse: collapse;
   border: 1px solid;
   width: 100%;
+  table-layout: fixed;
   margin-top: 3rem;
   word-wrap:break-word;
 }
@@ -141,10 +141,18 @@
 
 /* Mobile */
 @media (max-width: 700px) {
+  .main {
+    padding: 2em;
+  }
   .content {
     padding: 4rem;
   }
 
+  .card {
+    width: 100%;
+    table-layout: fixed;
+  }
+  
   .grid {
     grid-template-columns: 1fr;
     margin-bottom: 120px;
