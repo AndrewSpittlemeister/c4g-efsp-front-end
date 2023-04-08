@@ -2,10 +2,11 @@ import styles from '@/styles/Home.module.css'
 import React, { useEffect, useState } from "react"
 import { useSession } from "next-auth/react"
 import { useRouter } from 'next/router';
+import getUserRole from "@/lib/users";
 
 export default function ConfirmationPage({ params }) {
     const router = useRouter();
-    const { data: session } = useSession();
+    const { data: session, status } = useSession();
     const data = router.query;
 
     // will be used to populate the similar records HTML data below
@@ -95,6 +96,37 @@ export default function ConfirmationPage({ params }) {
     async function processReject() {
         setConfirmRejectPressed(true);
         setConfirmRejectState("Rejected");
+    }
+
+    if (status != "authenticated") {
+        return (
+            <main className={styles.main}>
+                <h1>Page Requires Authentication</h1>
+                <br></br>
+                <div className={styles.card}>
+                    <p>Navigate to the home page and sign-in first.</p>
+                    <br></br>
+                    <button className={styles.button} style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: "10px", marginBottom: "5px" }} onClick={() => router.push('/')}>
+                        Return Home
+                    </button>
+                </div>
+            </main>
+        )
+    }
+    if (!["agent", "admin"].includes(getUserRole(session.user.email))) {
+        return (
+            <main className={styles.main}>
+                <h1>Insufficient Privileges</h1>
+                <br></br>
+                <div className={styles.card}>
+                    <p>This page requires agent-level or admin-level privileges to access, sign in with a different account with these privileges to use this page.</p>
+                    <br></br>
+                    <button className={styles.button} style={{ marginLeft: 'auto', marginRight: 'auto', marginTop: "10px", marginBottom: "5px" }} onClick={() => router.push('/')}>
+                        Return Home
+                    </button>
+                </div>
+            </main>
+        )
     }
 
     return (
