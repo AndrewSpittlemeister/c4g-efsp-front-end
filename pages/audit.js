@@ -361,6 +361,7 @@ export default function ConfirmationPage({ params }) {
     const router = useRouter();
     const { data: session, status } = useSession();
     const [allRecords, setAllRecords] = useState([]);
+    const [formData, setFormData] = useState({ "applicationID": 0 });
 
     const columns = React.useMemo(
         () => [
@@ -549,6 +550,40 @@ export default function ConfirmationPage({ params }) {
         [router.isReady]
     );
 
+    const handleInput = (e) => {
+        const fieldName = e.target.name;
+        const fieldValue = e.target.value;
+
+        setFormData((prevState) => ({
+            ...prevState,
+            [fieldName]: fieldValue
+        }));
+    }
+
+    const submitForm = async (e) => {
+        // We don't want the page to refresh
+        e.preventDefault();
+
+        if (formData.hasOwnProperty("applicationID")) {
+            let res = await fetch(
+                `/api/removeRecord?identity=${formData.applicationID}`,
+                {
+                    method: "GET",
+                    headers: {
+                        "accept": "application/json",
+                    },
+                },
+            );
+            let res_json = await res.json();
+            console.log(`remove record call response status: ${res.status}`);
+            alert(res_json.result);
+        } else {
+            alert("An error has occurred in parsing this form, please refresh the page.");
+        }
+
+        window.location.reload();
+    }
+
     if (status != "authenticated") {
         return (
             <main className={styles.main}>
@@ -582,6 +617,22 @@ export default function ConfirmationPage({ params }) {
             return (
                 <main className={styles.auditmain}>
                     <h1>Audit Records</h1>
+                    <h2 style={{ marginTop: '10px', marginBottom: "10px" }}>Remove Record</h2>
+                    <div className={styles.container} style={{ width: '30%', minWidth: "250px" }}>
+                        <p style={{ marginTop: '10px', marginBottom: "10px" }}>
+                            {"Remove a record (equivalent to a row in the table below) by it's \"ApplicationID\" field."}
+                        </p>
+                        <form id="remove-record-form" onSubmit={submitForm} style={{ overflow: 'hidden' }}>
+                            <div className={styles.container}>
+                                <label className={styles.required}>Application ID: </label>
+                                <span style={{ display: "block", overflow: "hidden", marginTop: "5px" }}>
+                                    <input type="number" required={true} name="applicationID" style={{ width: '100%' }} onChange={handleInput} value={formData.applicationID}/>
+                                </span>
+                            </div>
+                            <button className={styles.button} style={{ marginTop: '10px', marginBottom: "10px" }} type="submit">Submit</button>
+                        </form>
+                    </div>
+                    <h2 style={{ marginTop: '10px', marginBottom: "10px" }}>Explore Records</h2>
                     <Styles>
                         <Table columns={columns} data={allRecords} />
                     </Styles>
