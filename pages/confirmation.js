@@ -39,7 +39,7 @@ export default function ConfirmationPage({ params }) {
             }
             getSimilarRecords();
         },
-        [router.isReady, data.dob, data.lastname]
+        [router.isReady, data.applicantDOB, data.applicantLastName]
     );
 
     // TODO: add an alert when a request is approved
