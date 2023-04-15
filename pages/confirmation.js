@@ -21,7 +21,7 @@ export default function ConfirmationPage({ params }) {
             async function getSimilarRecords() {
                 if (router.isReady) {
                     let records_res = await fetch(
-                        `/api/gatherSimilarRecords?dob=${data.applicantDOB}&lastname=${data.applicantLastName}`,
+                        `/api/gatherSimilarRecords?dob=${data.applicantDOB}&firstname=${data.applicantFirstName}&lastname=${data.applicantLastName}`,
                         {
                             method: "GET",
                             headers: {

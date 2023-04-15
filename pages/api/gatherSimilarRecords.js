@@ -5,7 +5,9 @@ export default async function handler(req, res) {
     console.log("inGatherSimilarRecords with query params:");
     console.log(req.query);
 
+    let req_firstname = req.query.firstname.toLowerCase().trim();
     let req_lastname = req.query.lastname.toLowerCase().trim();
+    let req_name = `${req_firstname} ${req_lastname}`;
     let req_dob = req.query.dob.trim();
 
     let similarRecords = {};
@@ -17,8 +19,11 @@ export default async function handler(req, res) {
         );
 
         for (const record of db_result) {
+            let rec_firstname = record.FirstName.toLowerCase().trim();
             let rec_lastname = record.LastName.toLowerCase().trim();
-            var dist = calculate_distance(req_lastname, rec_lastname);
+            let rec_name = `${rec_firstname} ${rec_lastname}`;
+            var dist = calculate_distance(req_name, rec_name);
+
             var rec_dob = "";
             try {
                 rec_dob = JSON.stringify(record.DOB).split("T")[0].replaceAll('"', '');
