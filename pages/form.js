@@ -199,7 +199,16 @@ export default function Contact() {
                             <div className={styles.container}>
                                 <label>Funding Phase: </label>
                                 <span style={{ display: "block", overflow: "hidden", marginTop: "5px" }}>
-                                    <input type="text" name="fundingPhase" style={{ width: '100%' }} onChange={handleInput} value={formData.fundingPhase} />
+                                    <select type="text" name="fundingPhase" style={{ width: '100%' }} onChange={handleInput} value={formData.fundingPhase} >
+                                        <option value="ARPA-R">ARPA-R</option>
+                                        {
+                                            Array.from({length:62},(v,k)=>k+39).map(
+                                                (phase) => {
+                                                    return <option value={`${phase}`}>{`${phase}`}</option>
+                                                }
+                                            )
+                                        }
+                                    </select>
                                 </span>
                             </div>
 
