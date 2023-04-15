@@ -11,6 +11,7 @@ export default function ConfirmationPage({ params }) {
 
     // will be used to populate the similar records HTML data below
     const [similarRecordsResponse, setSimilarRecordsResponse] = useState([]);
+    const [householdMemberSimilarRecords, setHouseholdMemberSimilarRecords] = useState([]);
     const [confirmRejectPressed, setConfirmRejectPressed] = useState(false);
     const [confirmRejectState, setConfirmRejectState] = useState(null);
     const [addRecordSuccess, setAddRecordSuccess] = useState(false);
@@ -34,13 +35,55 @@ export default function ConfirmationPage({ params }) {
                     console.log("Setting Similar Records");
                     console.log(records);
                     setSimilarRecordsResponse(records.result);
+
+                    // parse out household members from query parameters
+                    let members = {};
+                    for (let key in data) {
+                        if (key.startsWith("householdMember")) {
+                            let elements = key.split("_");
+                            if (elements.length != 3) {
+                                continue;
+                            }
+                            let memberIndex = elements[1];
+                            let fieldKey = elements[2];
+                            let fieldVal = data[key];
+
+                            if (!members.hasOwnProperty(memberIndex)) {
+                                members[memberIndex] = {};
+                            }
+                            members[memberIndex][fieldKey] = fieldVal;
+                        }
+                    }
+
+                    var newHouseholdMemberSimilarRecords = {};
+                    for (let key in members) {
+                        let member = members[key];
+                        console.log("MEMBER: ", member);
+                        var member_records_res = await fetch(
+                            `/api/gatherSimilarRecords?dob=${member.dob}&firstname=${member.firstName}&lastname=${member.lastName}`,
+                            {
+                                method: "GET",
+                                headers: {
+                                    "accept": "application/json",
+                                },
+                            },
+                        );
+                        var member_records = await member_records_res.json();
+                        for (let k in member_records.result) {
+                            newHouseholdMemberSimilarRecords[k] = member_records.result[k];
+                        }
+                    }
+
+                    console.log("Household Member Records: ", newHouseholdMemberSimilarRecords);
+                    setHouseholdMemberSimilarRecords(newHouseholdMemberSimilarRecords);
                 } else {
                     setSimilarRecordsResponse([]);
+                    setHouseholdMemberSimilarRecords([]);
                 }
             }
             getSimilarRecords();
         },
-        [router.isReady, data.applicantDOB, data.applicantLastName]
+        [router.isReady, data]
     );
 
     // TODO: add an alert when a request is approved
@@ -175,12 +218,11 @@ export default function ConfirmationPage({ params }) {
                 </div>
 
                 <div className={styles.card}>
-                    <h2>
-                        {"Existing Similar Records"}
-                    </h2>
-                    <p style={{margin: 'auto'}}>
-                        The following records show similar information, take a look at these to ensure there is no duplication of information before confirming the request.
-                    </p>
+                    <h2>Existing Similar Records</h2>
+                    <br></br>
+                    <span>
+                        The following information shows previously approved funding records for applicants that have been detected to be similar to the current pending applicant. Take a look at these to ensure there is no duplication of information or resources before confirming the request.
+                    </span>
                     <br></br>
                     {
                         Object.keys(similarRecordsResponse).map(
@@ -190,6 +232,7 @@ export default function ConfirmationPage({ params }) {
                                 console.log(`Found Similar Applicant: ${name} (DOB: ${dob})`);
                                 return (
                                     <div key={name}>
+                                        <br></br>
                                         <h3>{`${name} (${dob})`}</h3>
                                         {
                                             history.map(
@@ -215,12 +258,56 @@ export default function ConfirmationPage({ params }) {
                     }
                 </div>
                 <br></br>
-                <button className={styles.button} style={{marginLeft: 'auto', marginRight: 'auto', marginTop: "10px", marginBottom: "5px"}} onClick={() => addApplication()}>
-                    Accept
-                </button>
-                <button className={styles.button} style={{marginLeft: 'auto', marginRight: 'auto', marginTop: "5px", marginBottom: "5px"}} onClick={() => processReject()}>
-                    Reject
-                </button>
+
+                <div className={styles.card}>
+                    <h2>Existing Similar Records of Household Members</h2>
+                    <br></br>
+                    <span>
+                        The following information shows previously approved funding records for applicants that have been detected to be similar to household members of the current pending applicant. Take a look at these to ensure there is no duplication of information or resources before confirming the request.
+                    </span>
+                    <br></br>
+                    {
+                        Object.keys(householdMemberSimilarRecords).map(
+                            (name) => {
+                                let dob = householdMemberSimilarRecords[name].dob;
+                                let history = householdMemberSimilarRecords[name].history;
+                                console.log(`Found Similar Applicant: ${name} (DOB: ${dob})`);
+                                return (
+                                    <div key={name}>
+                                        <br></br>
+                                        <h3>{`${name} (${dob})`}</h3>
+                                        {
+                                            history.map(
+                                                (application) => {
+                                                    return (
+                                                        <div key={application.identity} className={styles.card}>
+                                                            <p>{`Date: ${application.date}`}</p>
+                                                            <p>{`Jurisdiction: ${application.jurisdiction}`}</p>
+                                                            <p>{`Funding Phase: ${application.fundingPhase}`}</p>
+                                                            <p>{`Agency: ${application.agency}`}</p>
+                                                            <p>{`Payment Vendor: ${application.paymentVendor}`}</p>
+                                                            <p>{`Total Monthly Funding: $${application.totalFunding}`}</p>
+                                                            <p>{`Total Monthly Funding (LRO): $${application.totalFundingLRO}`}</p>
+                                                        </div>
+                                                    )
+                                                }
+                                            )
+                                        }
+                                    </div>
+                                )
+                            }
+                        )
+                    }
+                </div>
+                <br></br>
+                <div style={{display: "flex"}}>
+                    <button className={styles.button} style={{marginLeft: '5px', marginRight: '5px', marginTop: "15px", marginBottom: "5px"}} onClick={() => addApplication()}>
+                        Accept
+                    </button>
+                    <button className={styles.button} style={{marginLeft: '5px', marginRight: '5px', marginTop: "15px", marginBottom: "5px"}} onClick={() => processReject()}>
+                        Reject
+                    </button>
+                </div>
             </main>
         )
     )
