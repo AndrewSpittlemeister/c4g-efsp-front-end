@@ -40,8 +40,19 @@ export default async function handler(req, res) {
                     fundingPhase: record.FundingPhase,
                     agency: `${record.LROAgencyName} (LRO #${record.LRONumber})`,
                     paymentVendor: record.PaymentVendor,
-                    totalFunding: record.MonthlyRentAmt + record.MonthlyMortgageAmt + record.MonthlyGasAmt + record.MonthlyElectricityAmt + record.MonthlyWaterAmt,
-                    totalFundingLRO: record.MonthyRentAmt_LRO + record.MonthlyMortgageAmt_LRO + record.MonthlyGasAmt_LRO + record.MonthlyElectricityAmt_LRO + record.MonthlyWaterAmt_LRO,
+                    rent: record.MonthlyRentAmt,
+                    rentLRO: record.MonthyRentAmt_LRO,
+                    mortgage: record.MonthlyMortgageAmt,
+                    mortgageLRO: record.MonthlyMortgageAmt_LRO,
+                    lodgingCount: record.LodgingNightCount,
+                    lodgingCost: record.LodgingCostPerNight,
+                    lodgingCostLRO: record.LodgingCostPerNight_LRO,
+                    gas: record.MonthlyGasAmt,
+                    gasLRO: record.MonthlyGasAmt_LRO,
+                    electric: record.MonthlyElectricityAmt,
+                    electricLRO: record.MonthlyElectricityAmt_LRO,
+                    water: record.MonthlyWaterAmt,
+                    waterLRO: record.MonthlyWaterAmt_LRO,
                 }
 
                 if (similarRecords.hasOwnProperty(name)) {

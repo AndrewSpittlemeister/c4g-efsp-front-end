@@ -220,10 +220,9 @@ export default function ConfirmationPage({ params }) {
                 <div className={styles.card}>
                     <h2>Existing Similar Records</h2>
                     <br></br>
-                    <span>
+                    <p>
                         The following information shows previously approved funding records for applicants that have been detected to be similar to the current pending applicant. Take a look at these to ensure there is no duplication of information or resources before confirming the request.
-                    </span>
-                    <br></br>
+                    </p>
                     {
                         Object.keys(similarRecordsResponse).map(
                             (name) => {
@@ -244,8 +243,19 @@ export default function ConfirmationPage({ params }) {
                                                             <p>{`Funding Phase: ${application.fundingPhase}`}</p>
                                                             <p>{`Agency: ${application.agency}`}</p>
                                                             <p>{`Payment Vendor: ${application.paymentVendor}`}</p>
-                                                            <p>{`Total Monthly Funding: $${application.totalFunding}`}</p>
-                                                            <p>{`Total Monthly Funding (LRO): $${application.totalFundingLRO}`}</p>
+                                                            <p>{`Monthly Rent: $${application.rent}`}</p>
+                                                            <p>{`Monthly Rent LRO: $${application.rentLRO}`}</p>
+                                                            <p>{`Monthly Mortgage: $${application.mortgage}`}</p>
+                                                            <p>{`Monthly Mortgage LRO: $${application.mortgageLRO}`}</p>
+                                                            <p>{`Lodging Night Count: ${application.lodgingCount}`}</p>
+                                                            <p>{`Lodging Nightly Cost: $${application.lodgingCost}`}</p>
+                                                            <p>{`Lodging Nightly Cost LRO: $${application.lodgingCostLRO}`}</p>
+                                                            <p>{`Monthly Gas: $${application.gas}`}</p>
+                                                            <p>{`Monthly Gas LRO: $${application.gasLRO}`}</p>
+                                                            <p>{`Monthly Electric: $${application.electric}`}</p>
+                                                            <p>{`Monthly Electric LRO: $${application.electricLRO}`}</p>
+                                                            <p>{`Monthly Water: $${application.water}`}</p>
+                                                            <p>{`Monthly Water LRO: $${application.waterLRO}`}</p>
                                                         </div>
                                                     )
                                                 }
@@ -262,10 +272,9 @@ export default function ConfirmationPage({ params }) {
                 <div className={styles.card}>
                     <h2>Existing Similar Records of Household Members</h2>
                     <br></br>
-                    <span>
+                    <p>
                         The following information shows previously approved funding records for applicants that have been detected to be similar to household members of the current pending applicant. Take a look at these to ensure there is no duplication of information or resources before confirming the request.
-                    </span>
-                    <br></br>
+                    </p>
                     {
                         Object.keys(householdMemberSimilarRecords).map(
                             (name) => {
@@ -286,8 +295,19 @@ export default function ConfirmationPage({ params }) {
                                                             <p>{`Funding Phase: ${application.fundingPhase}`}</p>
                                                             <p>{`Agency: ${application.agency}`}</p>
                                                             <p>{`Payment Vendor: ${application.paymentVendor}`}</p>
-                                                            <p>{`Total Monthly Funding: $${application.totalFunding}`}</p>
-                                                            <p>{`Total Monthly Funding (LRO): $${application.totalFundingLRO}`}</p>
+                                                            <p>{`Monthly Rent: $${application.rent}`}</p>
+                                                            <p>{`Monthly Rent LRO: $${application.rentLRO}`}</p>
+                                                            <p>{`Monthly Mortgage: $${application.mortgage}`}</p>
+                                                            <p>{`Monthly Mortgage LRO: $${application.mortgageLRO}`}</p>
+                                                            <p>{`Lodging Night Count: ${application.lodgingCount}`}</p>
+                                                            <p>{`Lodging Nightly Cost: $${application.lodgingCost}`}</p>
+                                                            <p>{`Lodging Nightly Cost LRO: $${application.lodgingCostLRO}`}</p>
+                                                            <p>{`Monthly Gas: $${application.gas}`}</p>
+                                                            <p>{`Monthly Gas LRO: $${application.gasLRO}`}</p>
+                                                            <p>{`Monthly Electric: $${application.electric}`}</p>
+                                                            <p>{`Monthly Electric LRO: $${application.electricLRO}`}</p>
+                                                            <p>{`Monthly Water: $${application.water}`}</p>
+                                                            <p>{`Monthly Water LRO: $${application.waterLRO}`}</p>
                                                         </div>
                                                     )
                                                 }
