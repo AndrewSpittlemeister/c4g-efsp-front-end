@@ -214,6 +214,7 @@ export default function Contact() {
                                 <label>Funding Phase: </label>
                                 <span style={{ display: "block", overflow: "hidden", marginTop: "5px" }}>
                                     <select type="text" name="fundingPhase" style={{ width: '100%' }} onChange={handleInput} value={formData.fundingPhase} >
+                                        <option value=""></option>
                                         <option value="ARPA-R">ARPA-R</option>
                                         {
                                             Array.from({length:62},(v,k)=>k+39).map(
