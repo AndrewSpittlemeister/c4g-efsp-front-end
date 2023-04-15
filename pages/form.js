@@ -40,6 +40,11 @@ export default function Contact() {
 
     const [formSuccess, setFormSuccess] = useState(false)
     const [formSuccessMessage, setFormSuccessMessage] = useState("")
+    const [householdMembers, setHouseholdMembers] = useState([])
+
+    async function addMember() {
+        setHouseholdMembers([...householdMembers, { firstName: "", middleName: "", lastName: "", dob: "" }]);
+    }
 
     const handleInput = (e) => {
         const fieldName = e.target.name;
@@ -51,23 +56,32 @@ export default function Contact() {
         }));
     }
 
+    const handleMemberInput = (i, e) => {
+        let newHouseholdMembers = [...householdMembers];
+        newHouseholdMembers[i][e.target.name] = e.target.value;
+        setHouseholdMembers(newHouseholdMembers);
+    }
+
     const submitForm = async (e) => {
         // We don't want the page to refresh
         e.preventDefault()
 
-        const data = new FormData()
-
-        // Turn our formData state into data we can use with a form submission
-        Object.entries(formData).forEach(([key, value]) => {
-            data.append(key, value);
-        })
+        let data = {...formData};
+        for (let i = 0; i < householdMembers.length; i++) {
+            for (let k in householdMembers[i]) {
+                let fieldkey = `householdMember_${i}_${k}`;
+                let fieldVal = householdMembers[i][k];
+                data[fieldkey] = fieldVal;
+            }
+        }
 
         // POST the data to the URL of the form
-        console.log('Sending form data: ', formData);
+        console.log('Sending form data: ', data);
+        console.log('with household members: ', householdMembers);
         router.push(
             {
                 pathname: "/confirmation",
-                query: formData
+                query: data
             }
         );
     }
@@ -204,7 +218,7 @@ export default function Contact() {
                                         {
                                             Array.from({length:62},(v,k)=>k+39).map(
                                                 (phase) => {
-                                                    return <option value={`${phase}`}>{`${phase}`}</option>
+                                                    return <option key={phase} value={`${phase}`}>{`${phase}`}</option>
                                                 }
                                             )
                                         }
@@ -317,6 +331,38 @@ export default function Contact() {
                                         <label for="indirect">In Direct</label>
                                     </div>
                                 </fieldset>
+                            </div>
+
+                            <div className={styles.container}>
+                                <h3>Additional Household Members</h3>
+                                {
+                                    householdMembers.map(
+                                        (element, index) => {
+                                            return (
+                                                <div key={index}>
+                                                    <br></br>
+                                                    <label>First Name: </label>
+                                                    <span style={{ display: "block", overflow: "hidden", marginTop: "5px" }}>
+                                                        <input type="text" required={true} name="firstName" style={{ width: '100%' }} onChange={e => handleMemberInput(index, e)} value={element.firstName} />
+                                                    </span>
+                                                    <label>Middle Name (optional): </label>
+                                                    <span style={{ display: "block", overflow: "hidden", marginTop: "5px" }}>
+                                                        <input type="text" required={false} name="middleName" style={{ width: '100%' }} onChange={e => handleMemberInput(index, e)} value={element.middleName || ""} />
+                                                    </span>
+                                                    <label>Last Name: </label>
+                                                    <span style={{ display: "block", overflow: "hidden", marginTop: "5px" }}>
+                                                        <input type="text" required={true} name="lastName" style={{ width: '100%' }} onChange={e => handleMemberInput(index, e)} value={element.lastName} />
+                                                    </span>
+                                                    <label className={styles.required}>Date of Birth: </label>
+                                                    <span style={{ display: "block", overflow: "hidden", marginTop: "5px" }}>
+                                                        <input type="date" required={true} name="dob" style={{ width: '100%' }} onChange={e => handleMemberInput(index, e)} value={element.dob} />
+                                                    </span>
+                                                </div>
+                                            )
+                                        }
+                                    )
+                                }
+                                <button className={styles.button} style={{marginLeft: 'auto', marginRight: 'auto', marginTop: "5px", marginBottom: "5px"}} onClick={() => addMember()}>Add</button>
                             </div>
 
                             <button className={styles.button} style={{ marginTop: '10px', marginBottom: "10px" }} type="submit">Process Information</button>
