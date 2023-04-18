@@ -206,7 +206,17 @@ export default function Contact() {
                             <div className={styles.container}>
                                 <label>Jurisdiction: </label>
                                 <span style={{ display: "block", overflow: "hidden", marginTop: "5px" }}>
-                                    <input type="text" name="jurisdiction" style={{ width: '100%' }} onChange={handleInput} value={formData.jurisdiction} />
+                                    <select type="text" name="jurisdiction" style={{ width: '100%' }} onChange={handleInput} value={formData.jurisdiction} >
+                                        <option value=""></option>
+                                        <option value="Atlanta/Fulton/DeKalb">Atlanta/Fulton/DeKalb</option>
+                                        <option value="Coweta">Coweta</option>
+                                        <option value="Douglas">Douglas</option>
+                                        <option value="Gwinnett">Gwinnett</option>
+                                        <option value="Rockdale">Rockdale</option>
+                                        <option value="Cherokee">Cherokee</option>
+                                        <option value="Paulding">Paulding</option>
+                                        <option value="Fayette">Fayette</option>
+                                    </select>
                                 </span>
                             </div>
 
