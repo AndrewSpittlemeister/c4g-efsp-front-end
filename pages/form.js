@@ -329,7 +329,7 @@ export default function Contact() {
 
                                     <div>
                                         <input type="radio" id="indirect" name='directIndirect' value="indirect" onChange={handleInput} />
-                                        <label for="indirect">In Direct</label>
+                                        <label for="indirect">Indirect</label>
                                     </div>
                                 </fieldset>
                             </div>
