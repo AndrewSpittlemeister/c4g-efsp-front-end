@@ -40,7 +40,7 @@ export default function ConfirmationPage({ params }) {
             }
             fetchUserRole();
         },
-        [router.isReady, status]
+        [router.isReady, status, session]
     );
 
     // gather similar records from the database

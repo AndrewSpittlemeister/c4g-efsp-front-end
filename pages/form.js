@@ -66,7 +66,7 @@ export default function Contact() {
             }
             fetchUserRole();
         },
-        [router.isReady, status]
+        [router.isReady, status, session]
     );
 
     async function addMember() {

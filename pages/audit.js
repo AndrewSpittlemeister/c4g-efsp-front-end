@@ -390,7 +390,7 @@ export default function ConfirmationPage({ params }) {
             }
             fetchUserRole();
         },
-        [router.isReady, status]
+        [router.isReady, status, session]
     );
 
     const userColumns = React.useMemo(
