@@ -1,8 +1,7 @@
 import styles from '@/styles/Home.module.css'
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useSession } from "next-auth/react"
 import { useRouter } from 'next/router';
-import getUserRole from "@/lib/users";
 
 export default function Contact() {
     const router = useRouter();
@@ -41,6 +40,34 @@ export default function Contact() {
     const [formSuccess, setFormSuccess] = useState(false)
     const [formSuccessMessage, setFormSuccessMessage] = useState("")
     const [householdMembers, setHouseholdMembers] = useState([])
+    const [userRole, setUserRole] = useState("invalid");
+
+    useEffect(
+        () => {
+            async function fetchUserRole() {
+                if ((router.isReady) && (status === "authenticated")) {
+                    let res = await fetch(
+                        `/api/getUserRole?email=${session.user.email}`,
+                        {
+                            method: "GET",
+                            headers: {
+                                "accept": "application/json",
+                            },
+                        },
+                    );
+                    let res_json = await res.json();
+
+                    console.log(`Role for ${session.user.email}: `, res_json);
+
+                    if (res_json.hasOwnProperty('result')) {
+                        setUserRole(res_json["result"]);
+                    }
+                }
+            }
+            fetchUserRole();
+        },
+        [router.isReady, status]
+    );
 
     async function addMember() {
         setHouseholdMembers([...householdMembers, { firstName: "", middleName: "", lastName: "", dob: "" }]);
@@ -101,7 +128,7 @@ export default function Contact() {
             </main>
         )
     }
-    if (!["agent", "admin"].includes(getUserRole(session.user.email))) {
+    if (!["agent", "admin"].includes(userRole)) {
         return (
             <main className={styles.main}>
                 <h1>Insufficient Privileges</h1>
